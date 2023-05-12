@@ -1,10 +1,162 @@
 ﻿#include "sbgECom.h"
 #include <streamBuffer/sbgStreamBuffer.h>
 #include "commands/sbgEComCmdCommon.h"
+#include "commands/sbgEComCmdGnss.h"
+// sbgCommonLib headers
+#include <sbgCommon.h>
+#include <version/sbgVersion.h>
+
+// sbgECom headers
+#include <sbgEComLib.h>
 
 //----------------------------------------------------------------------//
 //- Public methods                                                     -//
 //----------------------------------------------------------------------//
+
+extern __declspec(dllexport) int CheckSum(int a, int b)
+{
+	int c = a+b;
+	return c;
+}
+
+void getAndPrintProductInfo(SbgEComHandle *pECom)
+{
+    printf("Getting product info...");
+    SbgErrorCode					errorCode;
+    SbgEComDeviceInfo				deviceInfo;
+
+    assert(pECom);
+
+    //
+    // Get device inforamtions
+    //
+    errorCode = sbgEComCmdGetInfo(pECom, &deviceInfo);
+
+    //
+    // Display device information if no error
+    //
+    if (errorCode == SBG_NO_ERROR)
+    {
+        printf("Product info connection established. Fetching product info...");
+        char	calibVersionStr[32];
+        char	hwRevisionStr[32];
+        char	fmwVersionStr[32];		
+
+        sbgVersionToStringEncoded(deviceInfo.calibationRev, calibVersionStr, sizeof(calibVersionStr));
+        sbgVersionToStringEncoded(deviceInfo.hardwareRev, hwRevisionStr, sizeof(hwRevisionStr));
+        sbgVersionToStringEncoded(deviceInfo.firmwareRev, fmwVersionStr, sizeof(fmwVersionStr));
+
+        printf("      Serial Number: %0.9"PRIu32"\n",	deviceInfo.serialNumber);
+        printf("       Product Code: %s\n",				deviceInfo.productCode);
+        printf("  Hardware Revision: %s\n",				hwRevisionStr);
+        printf("   Firmware Version: %s\n",				fmwVersionStr);
+        printf("     Calib. Version: %s\n",				calibVersionStr);
+        printf("\n");
+    }
+    else
+    {
+        printf("Unable to connect to product info.");
+        SBG_LOG_WARNING(errorCode, "Unable to retrieve device information");
+    }
+}
+
+void changeGNSSConfig(SbgEComHandle *pEcom)
+{
+	printf("debug1. \n");
+	SbgErrorCode			errorCode = SBG_NO_ERROR;
+	struct _SbgEComGnssInstallation gnssInstallation;
+	gnssInstallation.leverArmPrimary[0] = 1;
+	gnssInstallation.leverArmPrimary[1] = -0.345;
+	gnssInstallation.leverArmPrimary[2] = -0.170;
+	gnssInstallation.leverArmPrimaryPrecise = true;
+	gnssInstallation.leverArmSecondary[0] = 1;
+	gnssInstallation.leverArmSecondary[1] = 0.345;
+	gnssInstallation.leverArmSecondary[2] = -0.170;
+	gnssInstallation.leverArmSecondaryMode = true;
+
+	printf("debug2. \n");
+	errorCode = sbgEComCmdGnss1InstallationSet(&pEcom, &gnssInstallation);
+	if (errorCode == SBG_NO_ERROR)
+	{
+		printf("Successfully changed leverarm. \n");
+	}
+}
+
+
+void ChangeConfig(SbgInterface *pInterface)
+{
+    printf("Initializing sbgECom library....\n");
+    SbgErrorCode			errorCode = SBG_NO_ERROR;
+    SbgEComHandle			comHandle;
+		
+    assert(pInterface);
+
+    //
+    // Create the sbgECom library and associate it with the created interfaces
+    //
+    errorCode = sbgEComInit(&comHandle, pInterface);
+
+    //
+    // Test that the sbgECom has been initialized
+    //
+
+    if (errorCode == SBG_NO_ERROR)
+    {
+        printf("sbgECom library initialized.");
+        //
+        // Welcome message
+        //
+        printf("sbgECom version %s\n\n", SBG_E_COM_VERSION_STR);
+
+        //
+        // Query and display produce info, don't stop if there is an error
+        //
+        //getAndPrintProductInfo(&comHandle);
+    	changeGNSSConfig(&comHandle);
+        
+    }
+    else
+    {
+        printf("Failed to initialize sbgECom library.\n");
+        SBG_LOG_ERROR(errorCode, "Unable to initialize the sbgECom library");
+    }
+}
+
+extern __declspec(dllexport) void OpenInterface()
+{
+    printf("Opening Interface... \n");
+    // Configs
+    char serialPort[] = "COM5";
+    int baudrate = 115200;
+
+    
+    SbgErrorCode		errorCode = SBG_NO_ERROR;
+    SbgInterface		sbgInterface;
+    int					exitCode;
+
+    //
+    // Create a serial interface to communicate with the PULSE
+    //
+    errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPort, baudrate);
+    
+    if (errorCode == SBG_NO_ERROR)
+    {
+        printf("Interface opened. \n");
+        ChangeConfig(&sbgInterface);
+
+        sbgInterfaceDestroy(&sbgInterface);
+    }
+    else
+    {
+        SBG_LOG_ERROR(errorCode, "unable to open serial interface");
+        exitCode = EXIT_FAILURE;
+        printf("Failed to open interface. \n");
+    }
+    
+}
+
+// // /////////////////////////////////////////////////////////////////////////////////////
+
 
 SbgErrorCode sbgEComInit(SbgEComHandle *pHandle, SbgInterface *pInterface)
 {

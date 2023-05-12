@@ -1,0 +1,4 @@
+C:/Users/BarzyKader/Documents/repos/sbgECom/build/CMakeFiles/sbgECom.dir
+C:/Users/BarzyKader/Documents/repos/sbgECom/build/CMakeFiles/INSTALL.dir
+C:/Users/BarzyKader/Documents/repos/sbgECom/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/BarzyKader/Documents/repos/sbgECom/build/CMakeFiles/ZERO_CHECK.dir

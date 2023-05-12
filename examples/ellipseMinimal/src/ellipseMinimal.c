@@ -89,45 +89,7 @@ SbgErrorCode onLogReceived(SbgEComHandle *pHandle, SbgEComClass msgClass, SbgECo
  * \param[in]	pECom					SbgECom instance.
  * \return								SBG_NO_ERROR if successful.
  */
-static SbgErrorCode getAndPrintProductInfo(SbgEComHandle *pECom)
-{
-	SbgErrorCode					errorCode;
-	SbgEComDeviceInfo				deviceInfo;
 
-	assert(pECom);
-
-	//
-	// Get device inforamtions
-	//
-	errorCode = sbgEComCmdGetInfo(pECom, &deviceInfo);
-
-	//
-	// Display device information if no error
-	//
-	if (errorCode == SBG_NO_ERROR)
-	{
-		char	calibVersionStr[32];
-		char	hwRevisionStr[32];
-		char	fmwVersionStr[32];		
-
-		sbgVersionToStringEncoded(deviceInfo.calibationRev, calibVersionStr, sizeof(calibVersionStr));
-		sbgVersionToStringEncoded(deviceInfo.hardwareRev, hwRevisionStr, sizeof(hwRevisionStr));
-		sbgVersionToStringEncoded(deviceInfo.firmwareRev, fmwVersionStr, sizeof(fmwVersionStr));
-
-		printf("      Serial Number: %0.9"PRIu32"\n",	deviceInfo.serialNumber);
-		printf("       Product Code: %s\n",				deviceInfo.productCode);
-		printf("  Hardware Revision: %s\n",				hwRevisionStr);
-		printf("   Firmware Version: %s\n",				fmwVersionStr);
-		printf("     Calib. Version: %s\n",				calibVersionStr);
-		printf("\n");
-	}
-	else
-	{
-		SBG_LOG_WARNING(errorCode, "Unable to retrieve device information");
-	}
-
-	return errorCode;
-}
 
 /*!
  * Execute the ellipseMinimal example given an opened and valid interface.

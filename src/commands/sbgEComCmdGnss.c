@@ -155,7 +155,7 @@ static SbgErrorCode sbgEComCmdGnssInstallationSet(SbgEComHandle *pHandle, const 
 
 	assert(pHandle);
 	assert(pGnssInstallation);
-
+	printf("debug4. \n");
 	//
 	// Send the command three times
 	//
@@ -165,11 +165,12 @@ static SbgErrorCode sbgEComCmdGnssInstallationSet(SbgEComHandle *pHandle, const 
 		// Initialize stream buffer for output
 		//
 		sbgStreamBufferInitForWrite(&outputStream, outputBuffer, sizeof(outputBuffer));
-
+		printf("debug5. \n");
 		//
 		// Build payload
 		//
 		sbgStreamBufferWriteFloatLE(&outputStream, pGnssInstallation->leverArmPrimary[0]);
+		printf("debug6. \n");
 		sbgStreamBufferWriteFloatLE(&outputStream, pGnssInstallation->leverArmPrimary[1]);
 		sbgStreamBufferWriteFloatLE(&outputStream, pGnssInstallation->leverArmPrimary[2]);
 		sbgStreamBufferWriteBooleanLE(&outputStream, pGnssInstallation->leverArmPrimaryPrecise);
@@ -182,8 +183,9 @@ static SbgErrorCode sbgEComCmdGnssInstallationSet(SbgEComHandle *pHandle, const 
 		//
 		// Send the payload over ECom
 		//
+		printf("debug7. \n");
 		errorCode = sbgEComProtocolSend(&pHandle->protocolHandle, SBG_ECOM_CLASS_LOG_CMD_0, cmdId, sbgStreamBufferGetLinkedBuffer(&outputStream), sbgStreamBufferGetLength(&outputStream));
-
+		printf("debug8. \n");
 		//
 		// Make sure that the command has been sent
 		//
@@ -399,6 +401,7 @@ SbgErrorCode sbgEComCmdGnss1InstallationGet(SbgEComHandle *pHandle, SbgEComGnssI
 
 SbgErrorCode sbgEComCmdGnss1InstallationSet(SbgEComHandle *pHandle, const SbgEComGnssInstallation *pGnssInstallation)
 {
+	printf("debug3. \n");
 	assert(pHandle);
 	assert(pGnssInstallation);
 

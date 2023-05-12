@@ -18,7 +18,7 @@ option(BUILD_TOOLS "Build tools" OFF)
 #
 # sbgECom
 #
-add_library(${PROJECT_NAME} STATIC)
+add_library(${PROJECT_NAME} SHARED)
 
 file(GLOB_RECURSE COMMON_SRC ${PROJECT_SOURCE_DIR}/common/*.c)
 file(GLOB_RECURSE ECOM_SRC ${PROJECT_SOURCE_DIR}/src/*.c)
