@@ -158,9 +158,6 @@ static SbgErrorCode ellipseMinimalProcess(SbgInterface *pInterface)
 		SbgEComSettingsAction action = SBG_ECOM_SAVE_SETTINGS;
 		printf("saving_settings");
 		errorCode = sbgEComCmdSettingsAction(&comHandle, action);
-		errorCode = sbgEComCmdGnss1InstallationGet(&comHandle,&blabla);
-		printf("%.6f",blabla.leverArmPrimary[1]);
-		//errorCode = sbgEComCmdOutputSetConf(&comHandle, SBG_ECOM_OUTPUT_PORT_A, SBG_ECOM_CLASS_LOG_ECOM_0, SBG_ECOM_LOG_IMU_DATA, SBG_ECOM_OUTPUT_MODE_DIV_8);
 
 		if (errorCode != SBG_NO_ERROR)
 		{
@@ -174,7 +171,28 @@ static SbgErrorCode ellipseMinimalProcess(SbgInterface *pInterface)
 	return errorCode;
 }
 
-extern __declspec(dllexport) void OpenInterface()
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef _WIN32
+#  ifdef MODULE_API_EXPORTS
+#    define MODULE_API __declspec(dllexport)
+#  else
+#    define MODULE_API __declspec(dllimport)
+#  endif
+#else
+#  define MODULE_API
+#endif
+
+	MODULE_API void OpenInterface();
+
+#ifdef __cplusplus
+}
+#endif
+
+
+void OpenInterface()
 {
     printf("Opening Interface... \n");
     // Configs
