@@ -13,15 +13,9 @@
 //- Public methods                                                     -//
 //----------------------------------------------------------------------//
 
-extern __declspec(dllexport) int CheckSum(int a, int b)
-{
-	int c = a+b;
-	return c;
-}
-
 void getAndPrintProductInfo(SbgEComHandle *pECom)
 {
-    printf("Getting product info...");
+    printf("Getting product info... \n");
     SbgErrorCode					errorCode;
     SbgEComDeviceInfo				deviceInfo;
 
@@ -37,7 +31,7 @@ void getAndPrintProductInfo(SbgEComHandle *pECom)
     //
     if (errorCode == SBG_NO_ERROR)
     {
-        printf("Product info connection established. Fetching product info...");
+        printf("Product info connection established. Fetching product info... \n");
         char	calibVersionStr[32];
         char	hwRevisionStr[32];
         char	fmwVersionStr[32];		
@@ -55,8 +49,7 @@ void getAndPrintProductInfo(SbgEComHandle *pECom)
     }
     else
     {
-        printf("Unable to connect to product info.");
-        SBG_LOG_WARNING(errorCode, "Unable to retrieve device information");
+        printf("Unable to connect to product info. \n");
     }
 }
 
@@ -64,7 +57,16 @@ void changeGNSSConfig(SbgEComHandle *pEcom)
 {
 	printf("debug1. \n");
 	SbgErrorCode			errorCode = SBG_NO_ERROR;
-	struct _SbgEComGnssInstallation gnssInstallation;
+	SbgEComGnssInstallation gnssInstallation;
+	uint8_t outputBuffer[64];
+	SbgStreamBuffer outputStream;
+
+	assert(pEcom);
+
+	memset(&gnssInstallation, 0x00, sizeof(gnssInstallation));
+
+	sbgStreamBufferInitForWrite(&outputStream, outputBuffer, sizeof(outputBuffer));
+	
 	gnssInstallation.leverArmPrimary[0] = 1;
 	gnssInstallation.leverArmPrimary[1] = -0.345;
 	gnssInstallation.leverArmPrimary[2] = -0.170;
@@ -81,7 +83,6 @@ void changeGNSSConfig(SbgEComHandle *pEcom)
 		printf("Successfully changed leverarm. \n");
 	}
 }
-
 
 void ChangeConfig(SbgInterface *pInterface)
 {
@@ -111,15 +112,66 @@ void ChangeConfig(SbgInterface *pInterface)
         //
         // Query and display produce info, don't stop if there is an error
         //
-        //getAndPrintProductInfo(&comHandle);
-    	changeGNSSConfig(&comHandle);
+        getAndPrintProductInfo(&comHandle);
         
     }
     else
     {
         printf("Failed to initialize sbgECom library.\n");
-        SBG_LOG_ERROR(errorCode, "Unable to initialize the sbgECom library");
     }
+}
+
+static SbgErrorCode ellipseMinimalProcess(SbgInterface *pInterface)
+{
+	SbgErrorCode error_code = SBG_NO_ERROR;
+	SbgErrorCode			errorCode = SBG_NO_ERROR;
+	SbgEComHandle			comHandle;
+		
+	assert(pInterface);
+
+	//
+	// Create the sbgECom library and associate it with the created interfaces
+	//
+	errorCode = sbgEComInit(&comHandle, pInterface);
+
+	if (errorCode == SBG_NO_ERROR)
+	{
+		//
+		// Welcome message
+		//
+		printf("Welcome to the ELLIPSE minimal example.\n");
+		printf("sbgECom version %s\n\n", SBG_E_COM_VERSION_STR);
+
+		//
+		// Query and display produce info, don't stop if there is an error
+		//
+		getAndPrintProductInfo(&comHandle);
+
+		//
+		// Showcase how to configure some output logs to 25 Hz, don't stop if there is an error
+		//
+		SbgEComGnssInstallation blabla;
+		errorCode = sbgEComCmdGnss1InstallationGet(&comHandle,&blabla);
+		printf("%.6f",blabla.leverArmPrimary[1]);
+		blabla.leverArmPrimary[1] = 50;
+		errorCode = sbgEComCmdGnss1InstallationSet(&comHandle,&blabla);
+		SbgEComSettingsAction action = SBG_ECOM_SAVE_SETTINGS;
+		printf("saving_settings");
+		errorCode = sbgEComCmdSettingsAction(&comHandle, action);
+		errorCode = sbgEComCmdGnss1InstallationGet(&comHandle,&blabla);
+		printf("%.6f",blabla.leverArmPrimary[1]);
+		//errorCode = sbgEComCmdOutputSetConf(&comHandle, SBG_ECOM_OUTPUT_PORT_A, SBG_ECOM_CLASS_LOG_ECOM_0, SBG_ECOM_LOG_IMU_DATA, SBG_ECOM_OUTPUT_MODE_DIV_8);
+
+		if (errorCode != SBG_NO_ERROR)
+		{
+			printf("Unable to configure SBG_ECOM_LOG_IMU_DATA log");
+		}
+		else
+		{
+			printf("Success! \n");
+		}
+	}
+	return errorCode;
 }
 
 extern __declspec(dllexport) void OpenInterface()
@@ -132,7 +184,6 @@ extern __declspec(dllexport) void OpenInterface()
     
     SbgErrorCode		errorCode = SBG_NO_ERROR;
     SbgInterface		sbgInterface;
-    int					exitCode;
 
     //
     // Create a serial interface to communicate with the PULSE
@@ -142,18 +193,24 @@ extern __declspec(dllexport) void OpenInterface()
     if (errorCode == SBG_NO_ERROR)
     {
         printf("Interface opened. \n");
-        ChangeConfig(&sbgInterface);
-
-        sbgInterfaceDestroy(&sbgInterface);
+        errorCode = ellipseMinimalProcess(&sbgInterface);
+    	if (errorCode == SBG_NO_ERROR)
+    	{
+    		printf("successfully ran ellipseMinimalProcess function line 146.. \n");
+    	}
+    	else
+    	{
+    		printf("error running ran ellipseMinimalProcess function line 146..");
+    	}
     }
     else
     {
-        SBG_LOG_ERROR(errorCode, "unable to open serial interface");
-        exitCode = EXIT_FAILURE;
         printf("Failed to open interface. \n");
     }
     
 }
+
+
 
 // // /////////////////////////////////////////////////////////////////////////////////////
 
