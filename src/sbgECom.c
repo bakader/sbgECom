@@ -121,7 +121,7 @@ void ChangeConfig(SbgInterface *pInterface)
     }
 }
 
-static SbgErrorCode ellipseMinimalProcess(SbgInterface *pInterface)
+static SbgErrorCode ellipseMinimalProcess(SbgInterface *pInterface, int value)
 {
 	SbgErrorCode error_code = SBG_NO_ERROR;
 	SbgErrorCode			errorCode = SBG_NO_ERROR;
@@ -153,7 +153,7 @@ static SbgErrorCode ellipseMinimalProcess(SbgInterface *pInterface)
 		SbgEComGnssInstallation blabla;
 		errorCode = sbgEComCmdGnss1InstallationGet(&comHandle,&blabla);
 		printf("%.6f",blabla.leverArmPrimary[1]);
-		blabla.leverArmPrimary[1] = 50;
+		blabla.leverArmPrimary[1] = value;
 		errorCode = sbgEComCmdGnss1InstallationSet(&comHandle,&blabla);
 		SbgEComSettingsAction action = SBG_ECOM_SAVE_SETTINGS;
 		printf("saving_settings");
@@ -185,33 +185,28 @@ extern "C" {
 #  define MODULE_API
 #endif
 
-	MODULE_API void OpenInterface();
+	MODULE_API void OpenInterface(char serialPortName[], int baudrate, float leverArmPrimaryY);
 
 #ifdef __cplusplus
 }
 #endif
 
 
-void OpenInterface()
+void OpenInterface(char serialPortName[], int baudrate, float leverArmPrimaryY)
 {
     printf("Opening Interface... \n");
-    // Configs
-    char serialPort[] = "/dev/ttyO1";
-    int baudrate = 115200;
-
-    
     SbgErrorCode		errorCode = SBG_NO_ERROR;
     SbgInterface		sbgInterface;
 
     //
     // Create a serial interface to communicate with the PULSE
     //
-    errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPort, baudrate);
+    errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPortName, baudrate);
     
     if (errorCode == SBG_NO_ERROR)
     {
         printf("Interface opened. \n");
-        errorCode = ellipseMinimalProcess(&sbgInterface);
+        errorCode = ellipseMinimalProcess(&sbgInterface, leverArmPrimaryY);
     	if (errorCode == SBG_NO_ERROR)
     	{
     		printf("successfully ran ellipseMinimalProcess function line 146.. \n");
