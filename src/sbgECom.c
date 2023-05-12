@@ -93,16 +93,21 @@ static SbgErrorCode ChangeGNSSConfigRequest(SbgInterface *pInterface, float leve
 		printf("Secondary lever arm mode: %d \n", leverArmSecondaryMode);
 		
 		errorCode = sbgEComCmdGnss1InstallationSet(&comHandle,&sbgEComGnssInstallation);
-		printf("saving_settings. \n");
-		errorCode = sbgEComCmdSettingsAction(&comHandle, SBG_ECOM_SAVE_SETTINGS);
+		for (int i=0; i<=10; i++)
+		{
+			printf("saving_settings tryout: %d. \n", i);
+			errorCode = sbgEComCmdSettingsAction(&comHandle, SBG_ECOM_SAVE_SETTINGS);
 
-		if (errorCode != SBG_NO_ERROR)
-		{
-			printf("Unable to configure SBG_ECOM_LOG_IMU_DATA log");
-		}
-		else
-		{
-			printf("Successfully set new GNSS config.\n");
+			if (errorCode == SBG_NO_ERROR)
+			{
+				printf("Successfully set new GNSS config.\n");
+				break;
+			}
+			else
+			{
+				printf("Unable to configure SBG_ECOM_LOG_IMU_DATA log");
+			}
+			
 		}
 	}
 	return errorCode;

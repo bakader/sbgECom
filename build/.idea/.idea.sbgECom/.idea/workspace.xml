@@ -11,17 +11,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0fafa9f3-19d6-4f0b-968b-41c87645fe03" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.sbgECom/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.sbgECom/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Debug/sbgECom.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Debug/sbgECom.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Debug/sbgECom.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Debug/sbgECom.exp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Debug/sbgECom.lib" beforeDir="false" afterPath="$PROJECT_DIR$/Debug/sbgECom.lib" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Debug/sbgECom.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Debug/sbgECom.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.ilk" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.ilk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/CL.command.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/CL.command.1.tlog" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/CL.read.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/CL.read.1.tlog" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/CL.write.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/CL.write.1.tlog" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdGnss.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdGnss.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/vc143.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/vc143.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/sbgECom.c" beforeDir="false" afterPath="$PROJECT_DIR$/../src/sbgECom.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -205,7 +194,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1683877714810</updated>
-      <workItem from="1683877715857" duration="13370000" />
+      <workItem from="1683877715857" duration="14773000" />
     </task>
     <servers />
   </component>
