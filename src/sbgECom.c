@@ -13,6 +13,13 @@
 //- Public methods                                                     -//
 //----------------------------------------------------------------------//
 
+void printGNSSConfig(SbgEComGnssInstallation sbgEComGnssInstallation)
+{
+	printf("Primary lever arm: [x,y,z] = [%.6f,%.6f,%.6f] \n", sbgEComGnssInstallation.leverArmPrimary[0], sbgEComGnssInstallation.leverArmPrimary[1], sbgEComGnssInstallation.leverArmPrimary[2]);
+	printf("Primary level arm precise: X %s \n", sbgEComGnssInstallation.leverArmPrimaryPrecise ? "true" : "false");
+	printf("Secondary lever arm: [x,y,z] = [%.6f,%.6f,%.6f] \n", sbgEComGnssInstallation.leverArmSecondary[0], sbgEComGnssInstallation.leverArmSecondary[1], sbgEComGnssInstallation.leverArmSecondary[2]);
+}
+
 void getAndPrintProductInfo(SbgEComHandle *pECom)
 {
     printf("Getting product info... \n");
@@ -53,111 +60,41 @@ void getAndPrintProductInfo(SbgEComHandle *pECom)
     }
 }
 
-void changeGNSSConfig(SbgEComHandle *pEcom)
-{
-	printf("debug1. \n");
-	SbgErrorCode			errorCode = SBG_NO_ERROR;
-	SbgEComGnssInstallation gnssInstallation;
-	uint8_t outputBuffer[64];
-	SbgStreamBuffer outputStream;
-
-	assert(pEcom);
-
-	memset(&gnssInstallation, 0x00, sizeof(gnssInstallation));
-
-	sbgStreamBufferInitForWrite(&outputStream, outputBuffer, sizeof(outputBuffer));
-	
-	gnssInstallation.leverArmPrimary[0] = 1;
-	gnssInstallation.leverArmPrimary[1] = -0.345;
-	gnssInstallation.leverArmPrimary[2] = -0.170;
-	gnssInstallation.leverArmPrimaryPrecise = true;
-	gnssInstallation.leverArmSecondary[0] = 1;
-	gnssInstallation.leverArmSecondary[1] = 0.345;
-	gnssInstallation.leverArmSecondary[2] = -0.170;
-	gnssInstallation.leverArmSecondaryMode = true;
-
-	printf("debug2. \n");
-	errorCode = sbgEComCmdGnss1InstallationSet(&pEcom, &gnssInstallation);
-	if (errorCode == SBG_NO_ERROR)
-	{
-		printf("Successfully changed leverarm. \n");
-	}
-}
-
-void ChangeConfig(SbgInterface *pInterface)
-{
-    printf("Initializing sbgECom library....\n");
-    SbgErrorCode			errorCode = SBG_NO_ERROR;
-    SbgEComHandle			comHandle;
-		
-    assert(pInterface);
-
-    //
-    // Create the sbgECom library and associate it with the created interfaces
-    //
-    errorCode = sbgEComInit(&comHandle, pInterface);
-
-    //
-    // Test that the sbgECom has been initialized
-    //
-
-    if (errorCode == SBG_NO_ERROR)
-    {
-        printf("sbgECom library initialized.");
-        //
-        // Welcome message
-        //
-        printf("sbgECom version %s\n\n", SBG_E_COM_VERSION_STR);
-
-        //
-        // Query and display produce info, don't stop if there is an error
-        //
-        getAndPrintProductInfo(&comHandle);
-        
-    }
-    else
-    {
-        printf("Failed to initialize sbgECom library.\n");
-    }
-}
-
-static SbgErrorCode ellipseMinimalProcess(SbgInterface *pInterface, int value)
+static SbgErrorCode ChangeGNSSConfigRequest(SbgInterface *pInterface, float leverArmPrimary[3], bool leverArmPrimaryPrecise, float leverArmSecondary[3], int leverArmSecondaryMode)
 {
 	SbgErrorCode error_code = SBG_NO_ERROR;
-	SbgErrorCode			errorCode = SBG_NO_ERROR;
-	SbgEComHandle			comHandle;
+	SbgErrorCode errorCode = SBG_NO_ERROR;
+	SbgEComHandle comHandle;
 		
 	assert(pInterface);
 
-	//
-	// Create the sbgECom library and associate it with the created interfaces
-	//
 	errorCode = sbgEComInit(&comHandle, pInterface);
 
 	if (errorCode == SBG_NO_ERROR)
 	{
-		//
-		// Welcome message
-		//
-		printf("Welcome to the ELLIPSE minimal example.\n");
 		printf("sbgECom version %s\n\n", SBG_E_COM_VERSION_STR);
 
-		//
-		// Query and display produce info, don't stop if there is an error
-		//
 		getAndPrintProductInfo(&comHandle);
+		
+		SbgEComGnssInstallation sbgEComGnssInstallation;
+		errorCode = sbgEComCmdGnss1InstallationGet(&comHandle,&sbgEComGnssInstallation);
+		
+		printf("Current GNSS configuration: \n");
+		printGNSSConfig(sbgEComGnssInstallation);
 
-		//
-		// Showcase how to configure some output logs to 25 Hz, don't stop if there is an error
-		//
-		SbgEComGnssInstallation blabla;
-		errorCode = sbgEComCmdGnss1InstallationGet(&comHandle,&blabla);
-		printf("%.6f",blabla.leverArmPrimary[1]);
-		blabla.leverArmPrimary[1] = value;
-		errorCode = sbgEComCmdGnss1InstallationSet(&comHandle,&blabla);
-		SbgEComSettingsAction action = SBG_ECOM_SAVE_SETTINGS;
-		printf("saving_settings");
-		errorCode = sbgEComCmdSettingsAction(&comHandle, action);
+		printf("Setting new GNSS configuration. \n");
+		memcpy(sbgEComGnssInstallation.leverArmPrimary, leverArmPrimary, sizeof(leverArmPrimary));
+		sbgEComGnssInstallation.leverArmPrimaryPrecise = leverArmPrimaryPrecise;
+		memcpy(sbgEComGnssInstallation.leverArmSecondary, leverArmSecondary, sizeof(leverArmSecondary));
+		sbgEComGnssInstallation.leverArmSecondaryMode = leverArmSecondaryMode;
+
+		printf("New GNSS configuration: \n");
+		printGNSSConfig(sbgEComGnssInstallation);
+		printf("Secondary lever arm mode: %d \n", leverArmSecondaryMode);
+		
+		errorCode = sbgEComCmdGnss1InstallationSet(&comHandle,&sbgEComGnssInstallation);
+		printf("saving_settings. \n");
+		errorCode = sbgEComCmdSettingsAction(&comHandle, SBG_ECOM_SAVE_SETTINGS);
 
 		if (errorCode != SBG_NO_ERROR)
 		{
@@ -165,7 +102,7 @@ static SbgErrorCode ellipseMinimalProcess(SbgInterface *pInterface, int value)
 		}
 		else
 		{
-			printf("Success! \n");
+			printf("Successfully set new GNSS config.\n");
 		}
 	}
 	return errorCode;
@@ -176,52 +113,47 @@ extern "C" {
 #endif
 
 #ifdef _WIN32
-#  ifdef MODULE_API_EXPORTS
+
 #    define MODULE_API __declspec(dllexport)
-#  else
-#    define MODULE_API __declspec(dllimport)
-#  endif
+
 #else
 #  define MODULE_API
 #endif
 
-	MODULE_API void OpenInterface(char serialPortName[], int baudrate, float leverArmPrimaryY);
+	MODULE_API void ChangeGNSSConfig(char serialPortName[], int baudrate, float leverArmPrimary[3], bool leverArmPrimaryPrecise, float leverArmSecondary[3], int leverArmSecondaryMode)
+	{
+		printf("Starting config changing procedure... \n");
+		SbgErrorCode		errorCode = SBG_NO_ERROR;
+		SbgInterface		sbgInterface;
+
+		//
+		// Create a serial interface to communicate with the PULSE
+		//
+		errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPortName, baudrate);
+    
+		if (errorCode == SBG_NO_ERROR)
+		{
+			printf("Interface opened. \n");
+			errorCode = ChangeGNSSConfigRequest(&sbgInterface, leverArmPrimary, leverArmPrimaryPrecise, leverArmSecondary, leverArmSecondaryMode);
+			if (errorCode == SBG_NO_ERROR)
+			{
+				printf("Interface action successful. \n");
+			}
+			else
+			{
+				printf("Interface action failed. \n");
+			}
+		}
+		else
+		{
+			printf("Failed to open interface. \n");
+		}
+    
+	}
 
 #ifdef __cplusplus
 }
 #endif
-
-
-void OpenInterface(char serialPortName[], int baudrate, float leverArmPrimaryY)
-{
-    printf("Opening Interface... \n");
-    SbgErrorCode		errorCode = SBG_NO_ERROR;
-    SbgInterface		sbgInterface;
-
-    //
-    // Create a serial interface to communicate with the PULSE
-    //
-    errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPortName, baudrate);
-    
-    if (errorCode == SBG_NO_ERROR)
-    {
-        printf("Interface opened. \n");
-        errorCode = ellipseMinimalProcess(&sbgInterface, leverArmPrimaryY);
-    	if (errorCode == SBG_NO_ERROR)
-    	{
-    		printf("successfully ran ellipseMinimalProcess function line 146.. \n");
-    	}
-    	else
-    	{
-    		printf("error running ran ellipseMinimalProcess function line 146..");
-    	}
-    }
-    else
-    {
-        printf("Failed to open interface. \n");
-    }
-    
-}
 
 
 
