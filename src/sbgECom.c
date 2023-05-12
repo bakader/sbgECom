@@ -196,7 +196,7 @@ void OpenInterface()
 {
     printf("Opening Interface... \n");
     // Configs
-    char serialPort[] = "COM5";
+    char serialPort[] = "/dev/ttyO1";
     int baudrate = 115200;
 
     
