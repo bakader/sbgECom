@@ -167,11 +167,11 @@ extern "C" {
 		}
     
 	}
-	MODULE_API bool GetGpsPos(double* latitude, double* longitude, double* altitude)
+	MODULE_API bool GetGpsPos(double* latitude, double* longitude, double* altitude, char* serialPort, int baudrate)
 	{
 		SbgErrorCode errorCode = SBG_NO_ERROR;
 		SbgInterface sbgInterface;
-		errorCode = sbgInterfaceSerialCreate(&sbgInterface, "COM5", 115200);
+		errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPort, baudrate);
 		if (errorCode != SBG_NO_ERROR)
 		{
 			printf("Failed to created serial interface in the task of getting GPS Position. \n");
