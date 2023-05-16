@@ -154,6 +154,9 @@
     <ClCompile Include="C:\Users\BarzyKader\Documents\repos\sbgECom\src\protocol\sbgEComProtocol.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\BarzyKader\Documents\repos\sbgECom\src\pulseMinimal.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="C:\Users\BarzyKader\Documents\repos\sbgECom\src\sbgECom.c">
       <Filter>Source Files</Filter>
     </ClCompile>

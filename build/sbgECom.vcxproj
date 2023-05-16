@@ -309,7 +309,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\pulseMinimal.c" />
     <ClCompile Include="C:\Users\BarzyKader\Documents\repos\sbgECom\common\crc\sbgCrc.c" />
     <ClCompile Include="C:\Users\BarzyKader\Documents\repos\sbgECom\common\debug\sbgDebug.c" />
     <ClCompile Include="C:\Users\BarzyKader\Documents\repos\sbgECom\common\interfaces\sbgInterface.c" />
@@ -361,6 +360,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="C:\Users\BarzyKader\Documents\repos\sbgECom\src\commands\sbgEComCmdSettings.c" />
     <ClCompile Include="C:\Users\BarzyKader\Documents\repos\sbgECom\src\defs\sbgEComDefsGnss.c" />
     <ClCompile Include="C:\Users\BarzyKader\Documents\repos\sbgECom\src\protocol\sbgEComProtocol.c" />
+    <ClCompile Include="C:\Users\BarzyKader\Documents\repos\sbgECom\src\pulseMinimal.c" />
     <ClCompile Include="C:\Users\BarzyKader\Documents\repos\sbgECom\src\sbgECom.c" />
     <ClCompile Include="C:\Users\BarzyKader\Documents\repos\sbgECom\src\sbgEComGetVersion.c" />
     <ClCompile Include="C:\Users\BarzyKader\Documents\repos\sbgECom\src\transfer\sbgEComTransfer.c" />

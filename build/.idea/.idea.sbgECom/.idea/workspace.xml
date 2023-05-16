@@ -9,7 +9,83 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0fafa9f3-19d6-4f0b-968b-41c87645fe03" name="Changes" comment="">
+    <list default="true" id="99a08729-5ede-48dc-a65e-e58a651a1fd7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.sbgECom/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.sbgECom/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.26.3/CMakeDetermineCompilerABI_C.bin" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/3.26.3/CMakeDetermineCompilerABI_C.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.26.3/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/3.26.3/CMakeDetermineCompilerABI_CXX.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.26.3/CompilerIdC/CompilerIdC.exe" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/3.26.3/CompilerIdC/CompilerIdC.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.26.3/CompilerIdC/Debug/CMakeCCompilerId.obj" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/3.26.3/CompilerIdC/Debug/CMakeCCompilerId.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.26.3/CompilerIdCXX/CompilerIdCXX.exe" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/3.26.3/CompilerIdCXX/CompilerIdCXX.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/3.26.3/CompilerIdCXX/Debug/CMakeCXXCompilerId.obj" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/3.26.3/CompilerIdCXX/Debug/CMakeCXXCompilerId.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeFiles/CMakeConfigureLog.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Debug/sbgECom.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Debug/sbgECom.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Debug/sbgECom.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Debug/sbgECom.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/pulseMinimal.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/pulseMinimal.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgCommon.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgCommon.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgCrc.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgCrc.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgDebug.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgDebug.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.ilk" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.ilk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/CL.command.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/CL.command.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/CL.read.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/CL.read.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/CL.write.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/CL.write.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/link.command.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/link.command.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/link.read.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/link.read.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/link.write.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/link.write.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogAirData.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogAirData.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogDepth.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogDepth.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogDiag.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogDiag.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogDvl.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogDvl.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogEkf.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogEkf.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogEvent.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogEvent.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogGps.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogGps.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogImu.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogImu.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogMag.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogMag.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogOdometer.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogOdometer.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogRawData.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogRawData.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogRtcm.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogRtcm.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogSat.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogSat.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogShipMotion.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogShipMotion.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogStatus.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogStatus.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogUsbl.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogUsbl.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogUtc.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogUtc.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogs.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComBinaryLogs.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdAdvanced.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdAdvanced.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdAirData.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdAirData.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdApi.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdApi.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdCommon.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdCommon.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdDvl.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdDvl.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdEthernet.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdEthernet.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdEvent.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdEvent.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdFeatures.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdFeatures.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdGnss.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdGnss.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdInfo.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdInfo.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdInterface.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdInterface.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdLicense.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdLicense.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdMag.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdMag.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdOdo.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdOdo.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdOutput.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdOutput.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdSensor.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdSensor.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdSettings.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComCmdSettings.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComDefsGnss.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComDefsGnss.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComGetVersion.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComGetVersion.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComProtocol.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComProtocol.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComTransfer.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgEComTransfer.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgInterface.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgInterface.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgInterfaceFile.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgInterfaceFile.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgInterfaceSerialWin.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgInterfaceSerialWin.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgInterfaceUdp.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgInterfaceUdp.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgNetwork.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgNetwork.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgPlatform.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgPlatform.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgSplitBuffer.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgSplitBuffer.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgStreamBuffer.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgStreamBuffer.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgString.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgString.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgSwap.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgSwap.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgVersion.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgVersion.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/vc143.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/vc143.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.vcxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.vcxproj.filters" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.vcxproj.filters" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/sbgECom.c" beforeDir="false" afterPath="$PROJECT_DIR$/../src/sbgECom.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -17,27 +93,19 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/../src/binaryLogs/sbgEComBinaryLogStatus.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../src/binaryLogs/sbgEComBinaryLogs.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../src/commands/sbgEComCmdGnss.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/../src/sbgEComIds.h" root0="SKIP_HIGHLIGHTING" />
-  </component>
-  <component name="ProjectId" id="2PgTRCqwz1SM9YyeZZyzv2Qhphn" />
+  <component name="ProjectId" id="2PrzVWwgJJFTE7a6K8UFbFnOPkf" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -191,12 +259,12 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="0fafa9f3-19d6-4f0b-968b-41c87645fe03" name="Changes" comment="" />
-      <created>1683877714810</created>
+      <changelist id="99a08729-5ede-48dc-a65e-e58a651a1fd7" name="Changes" comment="" />
+      <created>1684230013606</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1683877714810</updated>
-      <workItem from="1683877715857" duration="27141000" />
+      <updated>1684230013606</updated>
+      <workItem from="1684230014639" duration="887000" />
     </task>
     <servers />
   </component>

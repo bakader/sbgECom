@@ -49,185 +49,18 @@ void getAndPrintProductInfo(SbgEComHandle *pECom)
 	}
 }
 
-static SbgErrorCode pulseMinimalOnLogReceived(SbgEComHandle *pECom, SbgEComClass msgClass, SbgEComMsgId msg, const SbgBinaryLogData *pLogData, double *p)
+static SbgErrorCode gpsOnLogReceived(SbgEComHandle *pECom, SbgEComClass msgClass, SbgEComMsgId msg, const SbgBinaryLogData *pLogData, double *p)
 {
-
-	assert(pLogData);
-
-	if (msgClass == SBG_ECOM_CLASS_LOG_ECOM_0)
+	if (msgClass == SBG_ECOM_CLASS_LOG_ECOM_0 && msg==SBG_ECOM_LOG_GPS1_POS)
 	{
-		switch (msg)
-		{
-		case SBG_ECOM_LOG_GPS1_POS:
-			printf("GPS position is: %f, %f, %f \n", pLogData->gpsPosData.latitude, pLogData->gpsPosData.longitude, pLogData->gpsPosData.altitude);
-			double latitude = pLogData->gpsPosData.latitude;
-			double longitude = pLogData->gpsPosData.longitude;
-			double altitude = pLogData->gpsPosData.altitude;
-
-			*p = latitude;
-			p++;
-			*p = longitude;
-			p++;
-			*p = altitude;
-			break;
-
-		default:
-			break;
-		}
+		*p = pLogData->gpsPosData.latitude;
+		p++;
+		*p = pLogData->gpsPosData.longitude;
+		p++;
+		*p = pLogData->gpsPosData.altitude;
 	}
-
 	return SBG_NO_ERROR;
 }
-
-static void pulseMinimalReceive(SbgEComHandle *pECom)
-{
-	assert(pECom);
-	printf("Setting up LogCallback...\n");
-	double a[3] = {0,0,0};
-	double* p = a;
-	sbgEComSetReceiveLogCallback(pECom, pulseMinimalOnLogReceived, p);
-	while (1)
-	{
-		printf("Value of my assigned pointer is: %f, %f, %f \n", a[0], a[1], a[2]);
-		SbgErrorCode errorCode;
-		errorCode = sbgEComHandle(pECom);
-		sbgSleep(1000);
-	}
-}
-
-static SbgErrorCode pulseMinimalGetAndPrintProductInfo(SbgEComHandle *pECom)
-{
-	SbgEComCmdApiReply				 reply;
-	SbgErrorCode					 errorCode;
-
-	assert(pECom);
-
-	sbgEComCmdApiReplyConstruct(&reply);
-
-	errorCode = sbgEComCmdApiGet(pECom, "/api/v1/info", NULL, &reply);
-
-	if (errorCode == SBG_NO_ERROR)
-	{
-		char							 calibVersion[32];
-		char							 productCode[32];
-		char							 serialNumber[32];
-		char							 hwRevision[32];
-		char							 btVersion[32];
-		char							 fmwVersion[32];
-		int								 ret;
-
-		//
-		// This is a naive and simplistic way to parse a json content.
-		// It is recommanded to use a true json parser.
-		// The cJson library can help you with this.
-		//
-		ret = sscanf(reply.pContent, "{"									\
-										"\"productCode\":\"%[^\"]\","		\
-										"\"serialNumber\":\"%[^\"]\","		\
-										"\"hwRevision\":\"%[^\"]\","		\
-										"\"calibVersion\":\"%[^\"]\","		\
-										"\"fmwVersion\":\"%[^\"]\","		\
-										"\"btVersion\":\"%[^\"]\","			\
-									"}", productCode, serialNumber, hwRevision, calibVersion, fmwVersion, btVersion);
-		
-		if (ret == 6)
-		{
-			printf("       product code: %s\n", productCode);
-			printf("      serial number: %s\n", serialNumber);
-			printf("  hardware revision: %s\n", hwRevision);
-			printf("   firmware version: %s\n", fmwVersion);
-			printf(" bootLoader version: %s\n", btVersion);
-			printf("calibration version: %s\n", calibVersion);
-			printf("\n");
-		}
-		else
-		{
-			errorCode = SBG_INVALID_PARAMETER;
-			SBG_LOG_ERROR(errorCode, "Received JSON is mal formatted");
-		}
-	}
-	else
-	{
-		SBG_LOG_ERROR(errorCode, "unable to retrieve product info");
-	}
-
-	sbgEComCmdApiReplyDestroy(&reply);
-
-	return errorCode;
-}
-
-static SbgErrorCode pulseMinimalJsonParseError(const char* pContent, uint32_t *pStatus, char *pTitle, size_t titleMaxSize, char *pDetail, size_t detailMaxSize)
-{
-	SbgErrorCode	errorCode = SBG_NO_ERROR;
-	char			formatStr[128];
-	int				ret;
-
-	assert(pContent);
-	assert(pStatus);
-	assert(pTitle);
-	assert(titleMaxSize > 0);
-	assert(pDetail);	
-	assert(detailMaxSize > 0);
-
-	//
-	// Create a sscanf format string with built in width to avoid buffer overflows
-	// This is a naive implementation and sscanf should not be used to correctly address buffer overflows.
-	//
-	ret = sprintf(formatStr,	"{"									\
-									"\"status\": %%"PRIu32","		\
-									"\"title\":\"%%%zu[^\"]\","		\
-									"\"detail\":\"%%%zu[^\"]\","	\
-								"}", titleMaxSize, detailMaxSize);
-
-	if (ret > 0)
-	{		
-		//
-		// This is a naive and simplistic way to parse a json content.
-		// It is recommanded to use a true json parser.
-		// The cJson library can help you with this.
-		//
-		ret = sscanf(pContent, formatStr, pStatus, pTitle,  pDetail);
-
-		if (ret != 3)
-		{
-			errorCode = SBG_INVALID_PARAMETER;
-			SBG_LOG_ERROR(errorCode, "JSON payload mal formatted");
-		}
-	}
-	else
-	{
-		errorCode = SBG_ERROR;
-		SBG_LOG_ERROR(errorCode, "Unable to generate sscanf format string");
-	}
-
-	return errorCode;
-}
-
-static SbgErrorCode pulseMinimalProcess(SbgInterface *pInterface)
-{
-	SbgErrorCode						 errorCode;
-	SbgEComHandle						 comHandle;
-
-	assert(pInterface);
-
-	errorCode = sbgEComInit(&comHandle, pInterface);
-
-	if (errorCode == SBG_NO_ERROR)
-	{
-		printf("Successfully created ECom. \n");
-		getAndPrintProductInfo(&comHandle);
-
-		pulseMinimalReceive(&comHandle);
-
-		sbgEComClose(&comHandle);
-	}
-
-	return errorCode;
-}
-
-//----------------------------------------------------------------------//
-//- Public methods                                                     -//
-//----------------------------------------------------------------------//
 
 void printGNSSConfig(SbgEComGnssInstallation sbgEComGnssInstallation)
 {
@@ -289,6 +122,10 @@ static SbgErrorCode ChangeGNSSConfigRequest(SbgInterface *pInterface, float leve
 	return errorCode;
 }
 
+//----------------------------------------------------------------------//
+//- Public methods                                                     -//
+//----------------------------------------------------------------------//
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -330,17 +167,44 @@ extern "C" {
 		}
     
 	}
-	MODULE_API void GetGpsPos()
+	MODULE_API bool GetGpsPos(double* latitude, double* longitude, double* altitude)
 	{
-		SbgErrorCode		errorCode = SBG_NO_ERROR;
-		SbgInterface		sbgInterface;
-		int					exitCode;
+		SbgErrorCode errorCode = SBG_NO_ERROR;
+		SbgInterface sbgInterface;
 		errorCode = sbgInterfaceSerialCreate(&sbgInterface, "COM5", 115200);
-		if (errorCode == SBG_NO_ERROR)
+		if (errorCode != SBG_NO_ERROR)
 		{
-			printf("Successfully created serial interface. \n");
+			printf("Failed to created serial interface in the task of getting GPS Position. \n");
+			return 0;
 		}
-		errorCode = pulseMinimalProcess(&sbgInterface);
+		SbgEComHandle comHandle;
+		
+		errorCode = sbgEComInit(&comHandle, &sbgInterface);
+		if (errorCode != SBG_NO_ERROR)
+		{
+			printf("Failed to initialize sbgECom in the task of getting GPS Position. \n");
+			return 0;
+		}
+		double gpsPos[3] = {0,0,0};
+		double* pGpsPos = gpsPos;
+		sbgEComSetReceiveLogCallback(&comHandle, gpsOnLogReceived, pGpsPos);
+		bool continueLoop = true;
+		while (continueLoop)
+		{
+			errorCode = sbgEComHandle(&comHandle);
+			sbgSleep(1000);
+			if ((int)gpsPos[0]!=0 && (int)gpsPos[1]!=0 && (int)gpsPos[2]!=0)
+			{
+				printf("Value of my assigned pointer is: %f, %f, %f \n", gpsPos[0], gpsPos[1], gpsPos[2]);
+				break;
+			}
+		}
+		sbgEComClose(&comHandle);
+		*latitude = gpsPos[0];
+		*longitude = gpsPos[1];
+		*altitude = gpsPos[2];
+		printf("Value of my assigned pointer is: %f, %f, %f \n", *(latitude), *(longitude), *(altitude));
+		return true;
 	}
 #ifdef __cplusplus
 }

@@ -1,0 +1,150 @@
+^C:\USERS\BARZYKADER\DOCUMENTS\REPOS\SBGECOM\BUILD\_DEPS\ARGTABLE3-SUBBUILD\CMAKEFILES\5B0795E1D4B10B4883B7991B342D5575\ARGTABLE3-POPULATE-MKDIR.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -Dcfgdir=/Debug -P C:/Users/BarzyKader/Documents/repos/sbgECom/build/_deps/argtable3-subbuild/argtable3-populate-prefix/tmp/argtable3-populate-mkdirs.cmake
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/BarzyKader/Documents/repos/sbgECom/build/_deps/argtable3-subbuild/argtable3-populate-prefix/src/argtable3-populate-stamp/Debug/argtable3-populate-mkdir
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\BARZYKADER\DOCUMENTS\REPOS\SBGECOM\BUILD\_DEPS\ARGTABLE3-SUBBUILD\CMAKEFILES\5B0795E1D4B10B4883B7991B342D5575\ARGTABLE3-POPULATE-DOWNLOAD.RULE
+setlocal
+cd C:\Users\BarzyKader\Documents\repos\sbgECom\build\_deps
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/BarzyKader/Documents/repos/sbgECom/build/_deps/argtable3-subbuild/argtable3-populate-prefix/tmp/argtable3-populate-gitclone.cmake
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/BarzyKader/Documents/repos/sbgECom/build/_deps/argtable3-subbuild/argtable3-populate-prefix/src/argtable3-populate-stamp/Debug/argtable3-populate-download
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\BARZYKADER\DOCUMENTS\REPOS\SBGECOM\BUILD\_DEPS\ARGTABLE3-SUBBUILD\CMAKEFILES\5B0795E1D4B10B4883B7991B342D5575\ARGTABLE3-POPULATE-UPDATE.RULE
+setlocal
+cd C:\Users\BarzyKader\Documents\repos\sbgECom\build\_deps\argtable3-src
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/BarzyKader/Documents/repos/sbgECom/build/_deps/argtable3-subbuild/argtable3-populate-prefix/tmp/argtable3-populate-gitupdate.cmake
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\BARZYKADER\DOCUMENTS\REPOS\SBGECOM\BUILD\_DEPS\ARGTABLE3-SUBBUILD\CMAKEFILES\5B0795E1D4B10B4883B7991B342D5575\ARGTABLE3-POPULATE-PATCH.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/BarzyKader/Documents/repos/sbgECom/build/_deps/argtable3-subbuild/argtable3-populate-prefix/src/argtable3-populate-stamp/Debug/argtable3-populate-patch
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\BARZYKADER\DOCUMENTS\REPOS\SBGECOM\BUILD\_DEPS\ARGTABLE3-SUBBUILD\CMAKEFILES\5B0795E1D4B10B4883B7991B342D5575\ARGTABLE3-POPULATE-CONFIGURE.RULE
+setlocal
+cd C:\Users\BarzyKader\Documents\repos\sbgECom\build\_deps\argtable3-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/BarzyKader/Documents/repos/sbgECom/build/_deps/argtable3-subbuild/argtable3-populate-prefix/src/argtable3-populate-stamp/Debug/argtable3-populate-configure
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\BARZYKADER\DOCUMENTS\REPOS\SBGECOM\BUILD\_DEPS\ARGTABLE3-SUBBUILD\CMAKEFILES\5B0795E1D4B10B4883B7991B342D5575\ARGTABLE3-POPULATE-BUILD.RULE
+setlocal
+cd C:\Users\BarzyKader\Documents\repos\sbgECom\build\_deps\argtable3-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/BarzyKader/Documents/repos/sbgECom/build/_deps/argtable3-subbuild/argtable3-populate-prefix/src/argtable3-populate-stamp/Debug/argtable3-populate-build
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\BARZYKADER\DOCUMENTS\REPOS\SBGECOM\BUILD\_DEPS\ARGTABLE3-SUBBUILD\CMAKEFILES\5B0795E1D4B10B4883B7991B342D5575\ARGTABLE3-POPULATE-INSTALL.RULE
+setlocal
+cd C:\Users\BarzyKader\Documents\repos\sbgECom\build\_deps\argtable3-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/BarzyKader/Documents/repos/sbgECom/build/_deps/argtable3-subbuild/argtable3-populate-prefix/src/argtable3-populate-stamp/Debug/argtable3-populate-install
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\BARZYKADER\DOCUMENTS\REPOS\SBGECOM\BUILD\_DEPS\ARGTABLE3-SUBBUILD\CMAKEFILES\5B0795E1D4B10B4883B7991B342D5575\ARGTABLE3-POPULATE-TEST.RULE
+setlocal
+cd C:\Users\BarzyKader\Documents\repos\sbgECom\build\_deps\argtable3-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/BarzyKader/Documents/repos/sbgECom/build/_deps/argtable3-subbuild/argtable3-populate-prefix/src/argtable3-populate-stamp/Debug/argtable3-populate-test
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\BARZYKADER\DOCUMENTS\REPOS\SBGECOM\BUILD\_DEPS\ARGTABLE3-SUBBUILD\CMAKEFILES\3E3B372E2AEE340B742298B6D433FE30\ARGTABLE3-POPULATE-COMPLETE.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/BarzyKader/Documents/repos/sbgECom/build/_deps/argtable3-subbuild/CMakeFiles/Debug
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/BarzyKader/Documents/repos/sbgECom/build/_deps/argtable3-subbuild/CMakeFiles/Debug/argtable3-populate-complete
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/BarzyKader/Documents/repos/sbgECom/build/_deps/argtable3-subbuild/argtable3-populate-prefix/src/argtable3-populate-stamp/Debug/argtable3-populate-done
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\BARZYKADER\DOCUMENTS\REPOS\SBGECOM\BUILD\_DEPS\ARGTABLE3-SUBBUILD\CMAKEFILES\290E285C71DE149657E141264D2E5D1B\ARGTABLE3-POPULATE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\BARZYKADER\DOCUMENTS\REPOS\SBGECOM\BUILD\_DEPS\ARGTABLE3-SUBBUILD\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/BarzyKader/Documents/repos/sbgECom/build/_deps/argtable3-subbuild -BC:/Users/BarzyKader/Documents/repos/sbgECom/build/_deps/argtable3-subbuild --check-stamp-file C:/Users/BarzyKader/Documents/repos/sbgECom/build/_deps/argtable3-subbuild/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

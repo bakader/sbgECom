@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\BarzyKader\Documents\repos\sbgECom\build\_deps\argtable3-subbuild\CMakeFiles\5b0795e1d4b10b4883b7991b342d5575\argtable3-populate-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\BarzyKader\Documents\repos\sbgECom\build\_deps\argtable3-subbuild\CMakeFiles\5b0795e1d4b10b4883b7991b342d5575\argtable3-populate-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\BarzyKader\Documents\repos\sbgECom\build\_deps\argtable3-subbuild\CMakeFiles\5b0795e1d4b10b4883b7991b342d5575\argtable3-populate-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\BarzyKader\Documents\repos\sbgECom\build\_deps\argtable3-subbuild\CMakeFiles\5b0795e1d4b10b4883b7991b342d5575\argtable3-populate-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\BarzyKader\Documents\repos\sbgECom\build\_deps\argtable3-subbuild\CMakeFiles\5b0795e1d4b10b4883b7991b342d5575\argtable3-populate-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\BarzyKader\Documents\repos\sbgECom\build\_deps\argtable3-subbuild\CMakeFiles\5b0795e1d4b10b4883b7991b342d5575\argtable3-populate-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\BarzyKader\Documents\repos\sbgECom\build\_deps\argtable3-subbuild\CMakeFiles\5b0795e1d4b10b4883b7991b342d5575\argtable3-populate-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\BarzyKader\Documents\repos\sbgECom\build\_deps\argtable3-subbuild\CMakeFiles\5b0795e1d4b10b4883b7991b342d5575\argtable3-populate-test.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\BarzyKader\Documents\repos\sbgECom\build\_deps\argtable3-subbuild\CMakeFiles\3e3b372e2aee340b742298b6d433fe30\argtable3-populate-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\BarzyKader\Documents\repos\sbgECom\build\_deps\argtable3-subbuild\CMakeFiles\290e285c71de149657e141264d2e5d1b\argtable3-populate.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\BarzyKader\Documents\repos\sbgECom\build\_deps\argtable3-subbuild\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\BarzyKader\Documents\repos\sbgECom\build\_deps\argtable3-subbuild\CMakeFiles\argtable3-populate" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{836083C4-FF77-39D2-A71F-E127F3CBF7E4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
