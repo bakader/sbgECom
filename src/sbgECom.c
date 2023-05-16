@@ -61,7 +61,14 @@ static SbgErrorCode pulseMinimalOnLogReceived(SbgEComHandle *pECom, SbgEComClass
 		case SBG_ECOM_LOG_GPS1_POS:
 			printf("GPS position is: %f, %f, %f \n", pLogData->gpsPosData.latitude, pLogData->gpsPosData.longitude, pLogData->gpsPosData.altitude);
 			double latitude = pLogData->gpsPosData.latitude;
+			double longitude = pLogData->gpsPosData.longitude;
+			double altitude = pLogData->gpsPosData.altitude;
+
 			*p = latitude;
+			p++;
+			*p = longitude;
+			p++;
+			*p = altitude;
 			break;
 
 		default:
@@ -76,11 +83,12 @@ static void pulseMinimalReceive(SbgEComHandle *pECom)
 {
 	assert(pECom);
 	printf("Setting up LogCallback...\n");
-	double a;
-	sbgEComSetReceiveLogCallback(pECom, pulseMinimalOnLogReceived, &a);
+	double a[3] = {0,0,0};
+	double* p = a;
+	sbgEComSetReceiveLogCallback(pECom, pulseMinimalOnLogReceived, p);
 	while (1)
 	{
-		printf("Value of my assigned pointer is: %f \n", a);
+		printf("Value of my assigned pointer is: %f, %f, %f \n", a[0], a[1], a[2]);
 		SbgErrorCode errorCode;
 		errorCode = sbgEComHandle(pECom);
 		sbgSleep(1000);
