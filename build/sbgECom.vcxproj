@@ -309,6 +309,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\pulseMinimal.c" />
     <ClCompile Include="C:\Users\BarzyKader\Documents\repos\sbgECom\common\crc\sbgCrc.c" />
     <ClCompile Include="C:\Users\BarzyKader\Documents\repos\sbgECom\common\debug\sbgDebug.c" />
     <ClCompile Include="C:\Users\BarzyKader\Documents\repos\sbgECom\common\interfaces\sbgInterface.c" />

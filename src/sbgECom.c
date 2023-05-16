@@ -9,6 +9,214 @@
 // sbgECom headers
 #include <sbgEComLib.h>
 
+void getAndPrintProductInfo(SbgEComHandle *pECom)
+{
+	printf("Getting product info... \n");
+	SbgErrorCode					errorCode;
+	SbgEComDeviceInfo				deviceInfo;
+
+	assert(pECom);
+
+	//
+	// Get device inforamtions
+	//
+	errorCode = sbgEComCmdGetInfo(pECom, &deviceInfo);
+
+	//
+	// Display device information if no error
+	//
+	if (errorCode == SBG_NO_ERROR)
+	{
+		printf("Product info connection established. Fetching product info... \n");
+		char	calibVersionStr[32];
+		char	hwRevisionStr[32];
+		char	fmwVersionStr[32];		
+
+		sbgVersionToStringEncoded(deviceInfo.calibationRev, calibVersionStr, sizeof(calibVersionStr));
+		sbgVersionToStringEncoded(deviceInfo.hardwareRev, hwRevisionStr, sizeof(hwRevisionStr));
+		sbgVersionToStringEncoded(deviceInfo.firmwareRev, fmwVersionStr, sizeof(fmwVersionStr));
+
+		printf("      Serial Number: %0.9"PRIu32"\n",	deviceInfo.serialNumber);
+		printf("       Product Code: %s\n",				deviceInfo.productCode);
+		printf("  Hardware Revision: %s\n",				hwRevisionStr);
+		printf("   Firmware Version: %s\n",				fmwVersionStr);
+		printf("     Calib. Version: %s\n",				calibVersionStr);
+		printf("\n");
+	}
+	else
+	{
+		printf("Unable to connect to product info. \n");
+	}
+}
+
+static SbgErrorCode pulseMinimalOnLogReceived(SbgEComHandle *pECom, SbgEComClass msgClass, SbgEComMsgId msg, const SbgBinaryLogData *pLogData, double *p)
+{
+
+	assert(pLogData);
+
+	if (msgClass == SBG_ECOM_CLASS_LOG_ECOM_0)
+	{
+		switch (msg)
+		{
+		case SBG_ECOM_LOG_GPS1_POS:
+			printf("GPS position is: %f, %f, %f \n", pLogData->gpsPosData.latitude, pLogData->gpsPosData.longitude, pLogData->gpsPosData.altitude);
+			double latitude = pLogData->gpsPosData.latitude;
+			*p = latitude;
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	return SBG_NO_ERROR;
+}
+
+static void pulseMinimalReceive(SbgEComHandle *pECom)
+{
+	assert(pECom);
+	printf("Setting up LogCallback...\n");
+	double a;
+	sbgEComSetReceiveLogCallback(pECom, pulseMinimalOnLogReceived, &a);
+	while (1)
+	{
+		printf("Value of my assigned pointer is: %f \n", a);
+		SbgErrorCode errorCode;
+		errorCode = sbgEComHandle(pECom);
+		sbgSleep(1000);
+	}
+}
+
+static SbgErrorCode pulseMinimalGetAndPrintProductInfo(SbgEComHandle *pECom)
+{
+	SbgEComCmdApiReply				 reply;
+	SbgErrorCode					 errorCode;
+
+	assert(pECom);
+
+	sbgEComCmdApiReplyConstruct(&reply);
+
+	errorCode = sbgEComCmdApiGet(pECom, "/api/v1/info", NULL, &reply);
+
+	if (errorCode == SBG_NO_ERROR)
+	{
+		char							 calibVersion[32];
+		char							 productCode[32];
+		char							 serialNumber[32];
+		char							 hwRevision[32];
+		char							 btVersion[32];
+		char							 fmwVersion[32];
+		int								 ret;
+
+		//
+		// This is a naive and simplistic way to parse a json content.
+		// It is recommanded to use a true json parser.
+		// The cJson library can help you with this.
+		//
+		ret = sscanf(reply.pContent, "{"									\
+										"\"productCode\":\"%[^\"]\","		\
+										"\"serialNumber\":\"%[^\"]\","		\
+										"\"hwRevision\":\"%[^\"]\","		\
+										"\"calibVersion\":\"%[^\"]\","		\
+										"\"fmwVersion\":\"%[^\"]\","		\
+										"\"btVersion\":\"%[^\"]\","			\
+									"}", productCode, serialNumber, hwRevision, calibVersion, fmwVersion, btVersion);
+		
+		if (ret == 6)
+		{
+			printf("       product code: %s\n", productCode);
+			printf("      serial number: %s\n", serialNumber);
+			printf("  hardware revision: %s\n", hwRevision);
+			printf("   firmware version: %s\n", fmwVersion);
+			printf(" bootLoader version: %s\n", btVersion);
+			printf("calibration version: %s\n", calibVersion);
+			printf("\n");
+		}
+		else
+		{
+			errorCode = SBG_INVALID_PARAMETER;
+			SBG_LOG_ERROR(errorCode, "Received JSON is mal formatted");
+		}
+	}
+	else
+	{
+		SBG_LOG_ERROR(errorCode, "unable to retrieve product info");
+	}
+
+	sbgEComCmdApiReplyDestroy(&reply);
+
+	return errorCode;
+}
+
+static SbgErrorCode pulseMinimalJsonParseError(const char* pContent, uint32_t *pStatus, char *pTitle, size_t titleMaxSize, char *pDetail, size_t detailMaxSize)
+{
+	SbgErrorCode	errorCode = SBG_NO_ERROR;
+	char			formatStr[128];
+	int				ret;
+
+	assert(pContent);
+	assert(pStatus);
+	assert(pTitle);
+	assert(titleMaxSize > 0);
+	assert(pDetail);	
+	assert(detailMaxSize > 0);
+
+	//
+	// Create a sscanf format string with built in width to avoid buffer overflows
+	// This is a naive implementation and sscanf should not be used to correctly address buffer overflows.
+	//
+	ret = sprintf(formatStr,	"{"									\
+									"\"status\": %%"PRIu32","		\
+									"\"title\":\"%%%zu[^\"]\","		\
+									"\"detail\":\"%%%zu[^\"]\","	\
+								"}", titleMaxSize, detailMaxSize);
+
+	if (ret > 0)
+	{		
+		//
+		// This is a naive and simplistic way to parse a json content.
+		// It is recommanded to use a true json parser.
+		// The cJson library can help you with this.
+		//
+		ret = sscanf(pContent, formatStr, pStatus, pTitle,  pDetail);
+
+		if (ret != 3)
+		{
+			errorCode = SBG_INVALID_PARAMETER;
+			SBG_LOG_ERROR(errorCode, "JSON payload mal formatted");
+		}
+	}
+	else
+	{
+		errorCode = SBG_ERROR;
+		SBG_LOG_ERROR(errorCode, "Unable to generate sscanf format string");
+	}
+
+	return errorCode;
+}
+
+static SbgErrorCode pulseMinimalProcess(SbgInterface *pInterface)
+{
+	SbgErrorCode						 errorCode;
+	SbgEComHandle						 comHandle;
+
+	assert(pInterface);
+
+	errorCode = sbgEComInit(&comHandle, pInterface);
+
+	if (errorCode == SBG_NO_ERROR)
+	{
+		printf("Successfully created ECom. \n");
+		getAndPrintProductInfo(&comHandle);
+
+		pulseMinimalReceive(&comHandle);
+
+		sbgEComClose(&comHandle);
+	}
+
+	return errorCode;
+}
+
 //----------------------------------------------------------------------//
 //- Public methods                                                     -//
 //----------------------------------------------------------------------//
@@ -18,46 +226,6 @@ void printGNSSConfig(SbgEComGnssInstallation sbgEComGnssInstallation)
 	printf("Primary lever arm: [x,y,z] = [%.6f,%.6f,%.6f] \n", sbgEComGnssInstallation.leverArmPrimary[0], sbgEComGnssInstallation.leverArmPrimary[1], sbgEComGnssInstallation.leverArmPrimary[2]);
 	printf("Primary level arm precise: X %s \n", sbgEComGnssInstallation.leverArmPrimaryPrecise ? "true" : "false");
 	printf("Secondary lever arm: [x,y,z] = [%.6f,%.6f,%.6f] \n", sbgEComGnssInstallation.leverArmSecondary[0], sbgEComGnssInstallation.leverArmSecondary[1], sbgEComGnssInstallation.leverArmSecondary[2]);
-}
-
-void getAndPrintProductInfo(SbgEComHandle *pECom)
-{
-    printf("Getting product info... \n");
-    SbgErrorCode					errorCode;
-    SbgEComDeviceInfo				deviceInfo;
-
-    assert(pECom);
-
-    //
-    // Get device inforamtions
-    //
-    errorCode = sbgEComCmdGetInfo(pECom, &deviceInfo);
-
-    //
-    // Display device information if no error
-    //
-    if (errorCode == SBG_NO_ERROR)
-    {
-        printf("Product info connection established. Fetching product info... \n");
-        char	calibVersionStr[32];
-        char	hwRevisionStr[32];
-        char	fmwVersionStr[32];		
-
-        sbgVersionToStringEncoded(deviceInfo.calibationRev, calibVersionStr, sizeof(calibVersionStr));
-        sbgVersionToStringEncoded(deviceInfo.hardwareRev, hwRevisionStr, sizeof(hwRevisionStr));
-        sbgVersionToStringEncoded(deviceInfo.firmwareRev, fmwVersionStr, sizeof(fmwVersionStr));
-
-        printf("      Serial Number: %0.9"PRIu32"\n",	deviceInfo.serialNumber);
-        printf("       Product Code: %s\n",				deviceInfo.productCode);
-        printf("  Hardware Revision: %s\n",				hwRevisionStr);
-        printf("   Firmware Version: %s\n",				fmwVersionStr);
-        printf("     Calib. Version: %s\n",				calibVersionStr);
-        printf("\n");
-    }
-    else
-    {
-        printf("Unable to connect to product info. \n");
-    }
 }
 
 static SbgErrorCode ChangeGNSSConfigRequest(SbgInterface *pInterface, float leverArmPrimary[3], bool leverArmPrimaryPrecise, float leverArmSecondary[3], int leverArmSecondaryMode)
@@ -116,7 +284,6 @@ static SbgErrorCode ChangeGNSSConfigRequest(SbgInterface *pInterface, float leve
 #ifdef __cplusplus
 extern "C" {
 #endif
-
 #ifdef _WIN32
 
 #    define MODULE_API __declspec(dllexport)
@@ -155,7 +322,18 @@ extern "C" {
 		}
     
 	}
-
+	MODULE_API void GetGpsPos()
+	{
+		SbgErrorCode		errorCode = SBG_NO_ERROR;
+		SbgInterface		sbgInterface;
+		int					exitCode;
+		errorCode = sbgInterfaceSerialCreate(&sbgInterface, "COM5", 115200);
+		if (errorCode == SBG_NO_ERROR)
+		{
+			printf("Successfully created serial interface. \n");
+		}
+		errorCode = pulseMinimalProcess(&sbgInterface);
+	}
 #ifdef __cplusplus
 }
 #endif

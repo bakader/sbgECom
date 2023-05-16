@@ -11,6 +11,20 @@
   <component name="ChangeListManager">
     <list default="true" id="0fafa9f3-19d6-4f0b-968b-41c87645fe03" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.sbgECom/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.sbgECom/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Debug/sbgECom.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Debug/sbgECom.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Debug/sbgECom.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Debug/sbgECom.exp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Debug/sbgECom.lib" beforeDir="false" afterPath="$PROJECT_DIR$/Debug/sbgECom.lib" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Debug/sbgECom.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Debug/sbgECom.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.ilk" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.ilk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/CL.command.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/CL.command.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/CL.read.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/CL.read.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/CL.write.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/CL.write.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/link.command.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/link.command.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/link.read.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/link.read.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/link.write.1.tlog" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.tlog/link.write.1.tlog" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/vc143.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/vc143.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sbgECom.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.vcxproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/sbgECom.c" beforeDir="false" afterPath="$PROJECT_DIR$/../src/sbgECom.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -19,7 +33,10 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../src/binaryLogs/sbgEComBinaryLogStatus.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../src/binaryLogs/sbgEComBinaryLogs.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../src/commands/sbgEComCmdGnss.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../src/sbgEComIds.h" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="2PgTRCqwz1SM9YyeZZyzv2Qhphn" />
   <component name="ProjectViewState">
@@ -194,7 +211,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1683877714810</updated>
-      <workItem from="1683877715857" duration="14773000" />
+      <workItem from="1683877715857" duration="26720000" />
     </task>
     <servers />
   </component>
