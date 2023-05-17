@@ -167,7 +167,7 @@ extern "C" {
 		}
     
 	}
-	MODULE_API bool GetGpsPos(double* longitude, double* latitude, double* altitude, char* serialPort, int baudrate)
+	MODULE_API bool GetGpsPos(double* latitude, double* longitude, double* altitude, char* serialPort, int baudrate)
 	{
 		SbgErrorCode errorCode = SBG_NO_ERROR;
 		SbgInterface sbgInterface;
