@@ -167,59 +167,71 @@ extern "C" {
 		}
     
 	}
-	MODULE_API bool GetGpsPos(double* latitude, double* longitude, double* altitude, char* serialPort, int baudrate)
-	{
-		SbgErrorCode errorCode = SBG_NO_ERROR;
-		SbgInterface sbgInterface;
-		errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPort, baudrate);
-		if (errorCode != SBG_NO_ERROR)
-		{
-			//printf("Failed to created serial interface in the task of getting GPS Position. \n");
-			return false;
-		}
-		SbgEComHandle comHandle;
-		
-		errorCode = sbgEComInit(&comHandle, &sbgInterface);
-		if (errorCode != SBG_NO_ERROR)
-		{
-			//printf("Failed to initialize sbgECom in the task of getting GPS Position. \n");
-			return false;
-		}
-		double gpsPos[3] = {0,0,0};
-		double* pGpsPos = gpsPos;
-		sbgEComSetReceiveLogCallback(&comHandle, gpsOnLogReceived, pGpsPos);
-		int exitCounter = 0;
-		while (exitCounter < 10)
-		{
-			errorCode = sbgEComHandle(&comHandle);
-			if (errorCode!= SBG_ERROR)
-			{
-				if (gpsPos[0]!=0.0 && gpsPos[1]!=0.0 && gpsPos[2]!=0.0)
-				{
-					exitCounter = 100;
-				}
-				sbgSleep(1000);
-			}
-			exitCounter ++;
-		}
-		sbgInterfaceDestroy(&sbgInterface);
-		sbgEComClose(&comHandle);
-		*latitude = gpsPos[0];
-		*longitude = gpsPos[1];
-		*altitude = gpsPos[2];
-		//printf("Value of my assigned pointer is: %f, %f, %f \n", *(latitude), *(longitude), *(altitude));
-		if (exitCounter < 10)
-		{
-			return false;
-		}
-		return true;
-	}
 #ifdef __cplusplus
 }
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+#ifdef _WIN32
 
+#    define MODULE_API __declspec(dllexport)
 
+#else
+#  define MODULE_API
+#endif
+
+MODULE_API bool GetGpsPos(double* latitude, double* longitude, double* altitude, char* serialPort, int baudrate)
+{
+	SbgErrorCode errorCode = SBG_NO_ERROR;
+	SbgInterface sbgInterface;
+	errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPort, baudrate);
+	if (errorCode != SBG_NO_ERROR)
+	{
+		//printf("Failed to created serial interface in the task of getting GPS Position. \n");
+		return false;
+	}
+	SbgEComHandle comHandle;
+		
+	errorCode = sbgEComInit(&comHandle, &sbgInterface);
+	if (errorCode != SBG_NO_ERROR)
+	{
+		//printf("Failed to initialize sbgECom in the task of getting GPS Position. \n");
+		return false;
+	}
+	double gpsPos[3] = {0,0,0};
+	double* pGpsPos = gpsPos;
+	sbgEComSetReceiveLogCallback(&comHandle, gpsOnLogReceived, pGpsPos);
+	int exitCounter = 0;
+	while (exitCounter < 10)
+	{
+		errorCode = sbgEComHandle(&comHandle);
+		if (errorCode!= SBG_ERROR)
+		{
+			if (gpsPos[0]!=0.0 && gpsPos[1]!=0.0 && gpsPos[2]!=0.0)
+			{
+				exitCounter = 100;
+			}
+			sbgSleep(1000);
+		}
+		exitCounter ++;
+	}
+	sbgInterfaceDestroy(&sbgInterface);
+	sbgEComClose(&comHandle);
+	*latitude = gpsPos[0];
+	*longitude = gpsPos[1];
+	*altitude = gpsPos[2];
+	//printf("Value of my assigned pointer is: %f, %f, %f \n", *(latitude), *(longitude), *(altitude));
+	if (exitCounter < 10)
+	{
+		return false;
+	}
+	return true;
+}
+#ifdef __cplusplus
+}
+#endif
 // // /////////////////////////////////////////////////////////////////////////////////////
 
 

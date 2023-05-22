@@ -10,14 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99a08729-5ede-48dc-a65e-e58a651a1fd7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/.idea.sbgECom.dir/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/.idea.sbgECom.dir/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.sbgECom/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.sbgECom/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Debug/sbgECom.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Debug/sbgECom.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Debug/sbgECom.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Debug/sbgECom.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.ilk" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.ilk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.obj" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/sbgECom.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sbgECom.dir/Debug/vc143.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/sbgECom.dir/Debug/vc143.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../src/sbgECom.c" beforeDir="false" afterPath="$PROJECT_DIR$/../src/sbgECom.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +191,7 @@
       <updated>1684230013606</updated>
       <workItem from="1684230014639" duration="2224000" />
       <workItem from="1684323672234" duration="3255000" />
-      <workItem from="1684744498268" duration="1051000" />
+      <workItem from="1684744498268" duration="1843000" />
     </task>
     <servers />
   </component>
