@@ -114,7 +114,7 @@ static SbgErrorCode ChangeGNSSConfigRequest(SbgInterface *pInterface, float leve
 			}
 			else
 			{
-				printf("Unable to configure SBG_ECOM_LOG_IMU_DATA log");
+				printf("Unable to configure. Trying again...");
 			}
 			
 		}
