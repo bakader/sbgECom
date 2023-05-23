@@ -184,10 +184,13 @@ extern "C" {
 			if (errorCode == SBG_NO_ERROR)
 			{
 				printf("Interface action successful. \n");
+				sbgInterfaceDestroy(&sbgInterface);
+				return true;
 			}
 			else
 			{
 				printf("Interface action failed. \n");
+				sbgInterfaceDestroy(&sbgInterface);
 				return false;
 			}
 		}
