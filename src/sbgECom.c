@@ -87,6 +87,10 @@ static SbgErrorCode ChangeGNSSConfigRequest(SbgInterface *pInterface, float leve
 		
 		SbgEComGnssInstallation sbgEComGnssInstallation;
 		errorCode = sbgEComCmdGnss1InstallationGet(&comHandle,&sbgEComGnssInstallation);
+		if (error_code == SBG_ERROR)
+		{
+			return error_code;
+		}
 		
 		printf("Current GNSS configuration: \n");
 		printGNSSConfig(sbgEComGnssInstallation);
@@ -101,7 +105,28 @@ static SbgErrorCode ChangeGNSSConfigRequest(SbgInterface *pInterface, float leve
 		printGNSSConfig(sbgEComGnssInstallation);
 		printf("Secondary lever arm mode: %d \n", leverArmSecondaryMode);
 		
-		errorCode = sbgEComCmdGnss1InstallationSet(&comHandle,&sbgEComGnssInstallation);
+		printf("Setting new settings.");
+		for (int i=0; i<=10; i++)
+		{
+			printf("setting_settings tryout: %d. \n", i);
+			errorCode = sbgEComCmdGnss1InstallationSet(&comHandle,&sbgEComGnssInstallation);
+
+			if (errorCode == SBG_NO_ERROR)
+			{
+				printf("Successfully set new GNSS config.\n");
+				break;
+			}
+			else
+			{
+				printf("Unable to configure. Trying again...");
+				if (i==10)
+				{
+					return error_code;
+				}
+			}
+			
+		}
+		printf("Saving new settings.");
 		for (int i=0; i<=10; i++)
 		{
 			printf("saving_settings tryout: %d. \n", i);
@@ -114,7 +139,11 @@ static SbgErrorCode ChangeGNSSConfigRequest(SbgInterface *pInterface, float leve
 			}
 			else
 			{
-				printf("Unable to configure. Trying again...");
+				printf("Unable to save. Trying again...");
+				if (i==10)
+				{
+					return error_code;
+				}
 			}
 			
 		}
@@ -137,7 +166,7 @@ extern "C" {
 #  define MODULE_API
 #endif
 
-	MODULE_API void ChangeGNSSConfig(char serialPortName[], int baudrate, float leverArmPrimary[3], bool leverArmPrimaryPrecise, float leverArmSecondary[3], int leverArmSecondaryMode)
+	MODULE_API bool ChangeGNSSConfig(char serialPortName[], int baudrate, float leverArmPrimary[3], bool leverArmPrimaryPrecise, float leverArmSecondary[3], int leverArmSecondaryMode)
 	{
 		printf("Starting config changing procedure... \n");
 		SbgErrorCode		errorCode = SBG_NO_ERROR;
@@ -159,11 +188,13 @@ extern "C" {
 			else
 			{
 				printf("Interface action failed. \n");
+				return false;
 			}
 		}
 		else
 		{
 			printf("Failed to open interface. \n");
+			return false;
 		}
     
 	}
