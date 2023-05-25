@@ -232,7 +232,7 @@ extern "C" {
 				{
 					exitCounter = 100;
 				}
-				sbgSleep(200);
+				sbgSleep(50);
 			}
 			exitCounter ++;
 		}
