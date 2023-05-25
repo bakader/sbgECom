@@ -169,6 +169,7 @@ extern "C" {
 	MODULE_API bool ChangeGNSSConfig(char serialPortName[], int baudrate, float leverArmPrimary[3], bool leverArmPrimaryPrecise, float leverArmSecondary[3], int leverArmSecondaryMode)
 	{
 		printf("Starting config changing procedure... \n");
+		printf("Debug: %d", leverArmSecondary[1]);
 		SbgErrorCode		errorCode = SBG_NO_ERROR;
 		SbgInterface		sbgInterface;
 
