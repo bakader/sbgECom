@@ -98,6 +98,7 @@ static SbgErrorCode ChangeGNSSConfigRequest(SbgInterface *pInterface, float leve
 		printf("Setting new GNSS configuration. \n");
 		memcpy(sbgEComGnssInstallation.leverArmPrimary, leverArmPrimary, sizeof(leverArmPrimary));
 		sbgEComGnssInstallation.leverArmPrimaryPrecise = leverArmPrimaryPrecise;
+		printf("hmmmmm %f \n", leverArmSecondary[1]);
 		memcpy(sbgEComGnssInstallation.leverArmSecondary, leverArmSecondary, sizeof(leverArmSecondary));
 		sbgEComGnssInstallation.leverArmSecondaryMode = leverArmSecondaryMode;
 
