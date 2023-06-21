@@ -9,7 +9,7 @@
 // sbgECom headers
 #include <sbgEComLib.h>
 
-void getAndPrintProductInfo(SbgEComHandle *pECom)
+SbgErrorCode getAndPrintProductInfo(SbgEComHandle *pECom)
 {
 	printf("Getting product info... \n");
 	SbgErrorCode					errorCode;
@@ -71,25 +71,29 @@ void printGNSSConfig(SbgEComGnssInstallation sbgEComGnssInstallation)
 
 static SbgErrorCode ChangeGNSSConfigRequest(SbgInterface *pInterface, float leverArmPrimary[3], bool leverArmPrimaryPrecise, float leverArmSecondary[3], int leverArmSecondaryMode)
 {
-	SbgErrorCode error_code = SBG_NO_ERROR;
-	SbgErrorCode errorCode = SBG_NO_ERROR;
 	SbgEComHandle comHandle;
 		
 	assert(pInterface);
 
-	errorCode = sbgEComInit(&comHandle, pInterface);
+	SbgErrorCode errorCode = sbgEComInit(&comHandle, pInterface);
 
 	if (errorCode == SBG_NO_ERROR)
 	{
 		printf("sbgECom version %s\n\n", SBG_E_COM_VERSION_STR);
 
-		getAndPrintProductInfo(&comHandle);
+		errorCode = getAndPrintProductInfo(&comHandle);
+		if (errorCode != SBG_NO_ERROR)
+		{
+			printf("Failed to get product info. \n");
+			return errorCode;
+		}
 		
 		SbgEComGnssInstallation sbgEComGnssInstallation;
 		errorCode = sbgEComCmdGnss1InstallationGet(&comHandle,&sbgEComGnssInstallation);
-		if (error_code == SBG_ERROR)
+		if (errorCode != SBG_ERROR)
 		{
-			return error_code;
+			printf("Failed to fetch Gnss1 installation data. \n");
+			return errorCode;
 		}
 		
 		printf("Current GNSS configuration: \n");
@@ -107,52 +111,57 @@ static SbgErrorCode ChangeGNSSConfigRequest(SbgInterface *pInterface, float leve
 		sbgEComGnssInstallation.leverArmSecondary[2] = leverArmSecondary[2];
 		sbgEComGnssInstallation.leverArmSecondaryMode = leverArmSecondaryMode;
 
-		printf("New GNSS configuration: \n");
+		printf("Desired GNSS configuration: \n");
 		printGNSSConfig(sbgEComGnssInstallation);
 		printf("Secondary lever arm mode: %d \n", leverArmSecondaryMode);
 		
-		printf("Setting new settings.");
+		printf("Setting new settings. \n");
 		for (int i=0; i<=10; i++)
 		{
-			printf("setting_settings tryout: %d. \n", i);
+			printf("Updating settings tryout: %d. \n", i);
 			errorCode = sbgEComCmdGnss1InstallationSet(&comHandle,&sbgEComGnssInstallation);
 
-			if (errorCode == SBG_NO_ERROR)
-			{
-				printf("Successfully set new GNSS config.\n");
-				break;
-			}
-			else
+			if (errorCode != SBG_NO_ERROR)
 			{
 				printf("Unable to configure. Trying again...");
 				if (i==10)
 				{
-					return error_code;
+					return errorCode;
 				}
+			}
+			else
+			{
+				printf("Successfully configured new GNSS config. Saving required.\n");
+				break;
 			}
 			
 		}
-		printf("Saving new settings.");
+		printf("Saving new settings. \n");
 		for (int i=0; i<=10; i++)
 		{
-			printf("saving_settings tryout: %d. \n", i);
+			printf("Saving settings tryout: %d. \n", i);
 			errorCode = sbgEComCmdSettingsAction(&comHandle, SBG_ECOM_SAVE_SETTINGS);
 
-			if (errorCode == SBG_NO_ERROR)
-			{
-				printf("Successfully set new GNSS config.\n");
-				break;
-			}
-			else
+			if (errorCode != SBG_NO_ERROR)
 			{
 				printf("Unable to save. Trying again...");
 				if (i==10)
 				{
-					return error_code;
+					return errorCode;
 				}
+			}
+			else
+			{
+				printf("Successfully saved new GNSS config.\n");
+				break;
 			}
 			
 		}
+	}
+	else
+	{
+		printf("Failed to init sbgEcom. \n");
+		return errorCode;
 	}
 	return errorCode;
 }
@@ -175,7 +184,7 @@ extern "C" {
 	MODULE_API bool ChangeGNSSConfig(char serialPortName[], int baudrate, float leverArmPrimary[3], bool leverArmPrimaryPrecise, float leverArmSecondary[3], int leverArmSecondaryMode)
 	{
 		printf("Starting config changing procedure... \n");
-		printf("Debug: %f", leverArmSecondary[1]);
+		printf("Debug the leverArmSecondary is: %f \n", leverArmSecondary[1]);
 		SbgErrorCode		errorCode = SBG_NO_ERROR;
 		SbgInterface		sbgInterface;
 
@@ -201,11 +210,8 @@ extern "C" {
 				return false;
 			}
 		}
-		else
-		{
-			printf("Failed to open interface. \n");
-			return false;
-		}
+		printf("Failed to open interface. \n");
+		return false;
     
 	}
 	MODULE_API bool GetGpsPos(double* latitude, double* longitude, double* altitude, char* serialPort, int baudrate)
