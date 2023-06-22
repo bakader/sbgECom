@@ -84,7 +84,6 @@ static SbgErrorCode ChangeGNSSConfigRequest(SbgInterface *pInterface, float leve
 		printf("sbgECom version %s\n\n", SBG_E_COM_VERSION_STR);
 
 		errorCode = getAndPrintProductInfo(&comHandle);
-		printf(errorCode.)
 		if (errorCode != SBG_NO_ERROR)
 		{
 			printf("Failed to get product info. \n");
