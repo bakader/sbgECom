@@ -92,7 +92,7 @@ static SbgErrorCode ChangeGNSSConfigRequest(SbgInterface *pInterface, float leve
 		
 		SbgEComGnssInstallation sbgEComGnssInstallation;
 		errorCode = sbgEComCmdGnss1InstallationGet(&comHandle,&sbgEComGnssInstallation);
-		if (errorCode != SBG_ERROR)
+		if (errorCode != SBG_NO_ERROR)
 		{
 			printf("Failed to fetch Gnss1 installation data. \n");
 			return errorCode;

@@ -10,7 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99a08729-5ede-48dc-a65e-e58a651a1fd7" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.sbgECom/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.sbgECom/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/sbgECom.c" beforeDir="false" afterPath="$PROJECT_DIR$/../src/sbgECom.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -207,6 +207,7 @@
       <workItem from="1687251901907" duration="613000" />
       <workItem from="1687337919534" duration="87000" />
       <workItem from="1687350761565" duration="2171000" />
+      <workItem from="1687431790098" duration="387000" />
     </task>
     <servers />
   </component>
