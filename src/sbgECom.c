@@ -42,10 +42,12 @@ SbgErrorCode getAndPrintProductInfo(SbgEComHandle *pECom)
 		printf("   Firmware Version: %s\n",				fmwVersionStr);
 		printf("     Calib. Version: %s\n",				calibVersionStr);
 		printf("\n");
+		return errorCode;
 	}
 	else
 	{
 		printf("Unable to connect to product info. \n");
+		return errorCode;
 	}
 }
 
@@ -82,6 +84,7 @@ static SbgErrorCode ChangeGNSSConfigRequest(SbgInterface *pInterface, float leve
 		printf("sbgECom version %s\n\n", SBG_E_COM_VERSION_STR);
 
 		errorCode = getAndPrintProductInfo(&comHandle);
+		printf(errorCode.)
 		if (errorCode != SBG_NO_ERROR)
 		{
 			printf("Failed to get product info. \n");
