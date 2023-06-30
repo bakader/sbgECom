@@ -10,6 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99a08729-5ede-48dc-a65e-e58a651a1fd7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.sbgECom/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.sbgECom/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../src/sbgECom.c" beforeDir="false" afterPath="$PROJECT_DIR$/../src/sbgECom.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -20,9 +21,12 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/../src/binaryLogs/sbgEComBinaryLogGps.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../src/binaryLogs/sbgEComBinaryLogStatus.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../src/commands/sbgEComCmdAdvanced.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../src/commands/sbgEComCmdCommon.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../src/commands/sbgEComCmdFeatures.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../src/commands/sbgEComCmdGnss.h" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../src/commands/sbgEComCmdInterface.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../src/commands/sbgEComCmdSensor.h" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="2PrzVWwgJJFTE7a6K8UFbFnOPkf" />
   <component name="ProjectViewState">
@@ -207,7 +211,9 @@
       <workItem from="1687251901907" duration="613000" />
       <workItem from="1687337919534" duration="87000" />
       <workItem from="1687350761565" duration="2171000" />
-      <workItem from="1687431790098" duration="387000" />
+      <workItem from="1687431790098" duration="2271000" />
+      <workItem from="1687878467122" duration="11000" />
+      <workItem from="1688049799590" duration="5629000" />
     </task>
     <servers />
   </component>

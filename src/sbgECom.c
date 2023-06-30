@@ -2,6 +2,7 @@
 #include <streamBuffer/sbgStreamBuffer.h>
 #include "commands/sbgEComCmdCommon.h"
 #include "commands/sbgEComCmdGnss.h"
+#include "commands/sbgEComCmdSensor.h"
 // sbgCommonLib headers
 #include <sbgCommon.h>
 #include <version/sbgVersion.h>
@@ -168,6 +169,68 @@ static SbgErrorCode ChangeGNSSConfigRequest(SbgInterface *pInterface, float leve
 	return errorCode;
 }
 
+static SbgErrorCode ChangeSensorConfigRequest(SbgInterface *pInterface, int axisDirectionX, int axisDirectionY, float misRoll, float misPitch, float misYaw, const float leverArm[3])
+{
+	SbgEComHandle comHandle;
+	assert(pInterface);
+	SbgErrorCode errorCode = sbgEComInit(&comHandle, pInterface);
+	if (errorCode != SBG_NO_ERROR)
+	{
+		printf("Failed to init sbgECom");
+		return errorCode;
+	}
+	SbgEComSensorAlignmentInfo sbgEComSensorAlignmentInfo;
+	sbgEComSensorAlignmentInfo.axisDirectionX = axisDirectionX;
+	sbgEComSensorAlignmentInfo.axisDirectionY = axisDirectionY;
+	sbgEComSensorAlignmentInfo.misRoll = misRoll;
+	sbgEComSensorAlignmentInfo.misPitch = misPitch;
+	sbgEComSensorAlignmentInfo.misYaw = misYaw;
+	
+	printf("Setting new settings. \n");
+	for (int i=0; i<=10; i++)
+	{
+		printf("Updating settings tryout: %d. \n", i);
+		errorCode = sbgEComCmdSensorSetAlignmentAndLeverArm(&comHandle, &sbgEComSensorAlignmentInfo, leverArm);
+
+		if (errorCode != SBG_NO_ERROR)
+		{
+			printf("Unable to configure. Trying again...");
+			if (i==10)
+			{
+				return errorCode;
+			}
+		}
+		else
+		{
+			printf("Successfully configured new GNSS config. Saving required.\n");
+			break;
+		}
+			
+	}
+	printf("Saving new settings. \n");
+	for (int i=0; i<=10; i++)
+	{
+		printf("Saving settings tryout: %d. \n", i);
+		errorCode = sbgEComCmdSettingsAction(&comHandle, SBG_ECOM_SAVE_SETTINGS);
+
+		if (errorCode != SBG_NO_ERROR)
+		{
+			printf("Unable to save. Trying again...");
+			if (i==10)
+			{
+				return errorCode;
+			}
+		}
+		else
+		{
+			printf("Successfully saved new GNSS config.\n");
+			break;
+		}
+			
+	}
+	return errorCode;
+}
+
 //----------------------------------------------------------------------//
 //- Public methods                                                     -//
 //----------------------------------------------------------------------//
@@ -262,6 +325,32 @@ extern "C" {
 			return false;
 		}
 		return true;
+	}
+	MODULE_API bool ChangeSensorConfig(char serialPortName[], int baudrate, int axisDirectionX, int axisDirectionY, float misroll, float mispitch, float misyaw, float leverArm[3])
+	{
+		printf("Starting config changing procedure ... \n");
+		SbgErrorCode		errorCode = SBG_NO_ERROR;
+		SbgInterface		sbgInterface;
+		errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPortName, baudrate);
+		if (errorCode == SBG_NO_ERROR)
+		{
+			printf("Interface opened. \n");
+			errorCode = ChangeSensorConfigRequest(&sbgInterface,axisDirectionX,axisDirectionY,misroll, mispitch, misyaw,leverArm);
+			if (errorCode == SBG_NO_ERROR)
+			{
+				printf("Interface action successful. \n");
+				sbgInterfaceDestroy(&sbgInterface);
+				return true;
+			}
+			else
+			{
+				printf("Interface action failed. \n");
+				sbgInterfaceDestroy(&sbgInterface);
+				return false;
+			}
+		}
+		printf("Failed to open interface. \n");
+		return false;
 	}
 #ifdef __cplusplus
 }
