@@ -352,6 +352,42 @@ extern "C" {
 		printf("Failed to open interface. \n");
 		return false;
 	}
+
+	MODULE_API bool GetSensorConfig(char serialPortName[], int baudrate, int* axisDirectionX, int* axisDirectionY, float* misroll, float* mispitch, float* misyaw)
+	{
+		SbgErrorCode errorCode = SBG_NO_ERROR;
+		SbgInterface sbgInterface;
+		errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPort, baudrate);
+		if (errorCode != SBG_NO_ERROR)
+		{
+			//printf("Failed to created serial interface in the task of getting GPS Position. \n");
+			return false;
+		}
+		SbgEComHandle comHandle;
+		
+		errorCode = sbgEComInit(&comHandle, &sbgInterface);
+		if (errorCode != SBG_NO_ERROR)
+		{
+			//printf("Failed to initialize sbgECom in the task of getting GPS Position. \n");
+			return false;
+		}
+
+		SbgEComSensorAlignmentInfo myInfo;
+		double leverArm[3] = {0,0,0};
+		double* pleverArm = leverArm;
+		
+
+		sbgEComCmdSensorSetAlignmentAndLeverArm(&comHandle, myInfo, leverArm)
+
+		int* axisDirectionX = myInfo.axisDirectionX
+		int* axisDirectionY = myInfo.axisDirectionY
+		float* misroll = myInfo.misRoll;
+		float* mispitch = myInfo.misPitch;
+		float* misyaw = myInfo.misYaw
+
+		return true;
+	}
+		
 #ifdef __cplusplus
 }
 #endif
