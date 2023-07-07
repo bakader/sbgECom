@@ -357,7 +357,7 @@ extern "C" {
 	{
 		SbgErrorCode errorCode = SBG_NO_ERROR;
 		SbgInterface sbgInterface;
-		errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPort, baudrate);
+		errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPortName, baudrate);
 		if (errorCode != SBG_NO_ERROR)
 		{
 			//printf("Failed to created serial interface in the task of getting GPS Position. \n");
@@ -377,13 +377,13 @@ extern "C" {
 		double* pleverArm = leverArm;
 		
 
-		sbgEComCmdSensorSetAlignmentAndLeverArm(&comHandle, myInfo, leverArm)
+		sbgEComCmdSensorSetAlignmentAndLeverArm(&comHandle, &myInfo, &leverArm);
 
-		int* axisDirectionX = myInfo.axisDirectionX
-		int* axisDirectionY = myInfo.axisDirectionY
-		float* misroll = myInfo.misRoll;
-		float* mispitch = myInfo.misPitch;
-		float* misyaw = myInfo.misYaw
+		*axisDirectionX = myInfo.axisDirectionX;
+		*axisDirectionY = myInfo.axisDirectionY;
+		*misroll = myInfo.misRoll;
+		*mispitch = myInfo.misPitch;
+		*misyaw = myInfo.misYaw;
 
 		return true;
 	}
