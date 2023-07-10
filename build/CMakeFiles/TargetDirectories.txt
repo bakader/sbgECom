@@ -1,7 +1,0 @@
-/home/bak/Documents/sbgECom/build/CMakeFiles/install/local.dir
-/home/bak/Documents/sbgECom/build/CMakeFiles/install.dir
-/home/bak/Documents/sbgECom/build/CMakeFiles/sbgECom.dir
-/home/bak/Documents/sbgECom/build/CMakeFiles/list_install_components.dir
-/home/bak/Documents/sbgECom/build/CMakeFiles/install/strip.dir
-/home/bak/Documents/sbgECom/build/CMakeFiles/edit_cache.dir
-/home/bak/Documents/sbgECom/build/CMakeFiles/rebuild_cache.dir
