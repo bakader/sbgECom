@@ -438,7 +438,7 @@ SbgErrorCode sbgEComCmdSensorSetAlignmentAndLeverArm(SbgEComHandle *pHandle, con
 		//
 		// Build payload
 		//
-		sbgStreamBufferWriteUint8LE(&outputStream, 0);
+		sbgStreamBufferWriteUint8LE(&outputStream, (uint8_t)pAlignConf->axisDirectionX);
 		sbgStreamBufferWriteUint8LE(&outputStream, 3);
 		sbgStreamBufferWriteFloatLE(&outputStream, pAlignConf->misRoll);
 		sbgStreamBufferWriteFloatLE(&outputStream, pAlignConf->misPitch);
