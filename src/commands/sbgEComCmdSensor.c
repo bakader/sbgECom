@@ -446,9 +446,9 @@ SbgErrorCode sbgEComCmdSensorSetAlignmentAndLeverArm(SbgEComHandle *pHandle, con
 		printf("Debug 3 \n");
 
 		//Todo fix this
-		sbgStreamBufferWriteFloatLE(&outputStream, 0.0f);
-		sbgStreamBufferWriteFloatLE(&outputStream, 0.0f);
-		sbgStreamBufferWriteFloatLE(&outputStream, 0.0f);
+		sbgStreamBufferWriteFloatLE(&outputStream, pLeverArm[0]);
+		sbgStreamBufferWriteFloatLE(&outputStream, pLeverArm[1]);
+		sbgStreamBufferWriteFloatLE(&outputStream, pLeverArm[2]);
 		printf("Debug 4 \n");
 
 
