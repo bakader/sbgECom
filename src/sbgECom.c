@@ -182,7 +182,7 @@ static SbgErrorCode ChangeSensorConfigRequest(SbgInterface *pInterface, uint8 ax
 	printf("sbgECom version %s\n\n", SBG_E_COM_VERSION_STR);
 
 	errorCode = getAndPrintProductInfo(&comHandle);
-	
+	printf("Debuuuug %d \n", axisDirectionX);
 	SbgEComSensorAlignmentInfo sbgEComSensorAlignmentInfo;
 	sbgEComSensorAlignmentInfo.axisDirectionX = axisDirectionX;
 	sbgEComSensorAlignmentInfo.axisDirectionY = axisDirectionY;

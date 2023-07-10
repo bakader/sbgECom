@@ -422,7 +422,6 @@ SbgErrorCode sbgEComCmdSensorSetAlignmentAndLeverArm(SbgEComHandle *pHandle, con
 	assert(pHandle);
 	assert(pAlignConf);
 	assert(pLeverArm);
-	printf("Debug 1 \n");
 	
 	//
 	// Send the command three times
@@ -433,24 +432,20 @@ SbgErrorCode sbgEComCmdSensorSetAlignmentAndLeverArm(SbgEComHandle *pHandle, con
 		// Init stream buffer for output
 		//
 		sbgStreamBufferInitForWrite(&outputStream, outputBuffer, sizeof(outputBuffer));
-		printf("Debug 2 \n");
 
 		//
 		// Build payload
 		//
 		sbgStreamBufferWriteUint8LE(&outputStream, (uint8_t)pAlignConf->axisDirectionX);
-		sbgStreamBufferWriteUint8LE(&outputStream, 3);
+		sbgStreamBufferWriteUint8LE(&outputStream, (uint8_t)pAlignConf->axisDirectionY);
 		sbgStreamBufferWriteFloatLE(&outputStream, pAlignConf->misRoll);
 		sbgStreamBufferWriteFloatLE(&outputStream, pAlignConf->misPitch);
 		sbgStreamBufferWriteFloatLE(&outputStream, pAlignConf->misYaw);
-		printf("Debug 3 \n");
 
 		//Todo fix this
 		sbgStreamBufferWriteFloatLE(&outputStream, pLeverArm[0]);
 		sbgStreamBufferWriteFloatLE(&outputStream, pLeverArm[1]);
 		sbgStreamBufferWriteFloatLE(&outputStream, pLeverArm[2]);
-		printf("Debug 4 \n");
-
 
 		//
 		// Send the payload over ECom
@@ -462,19 +457,15 @@ SbgErrorCode sbgEComCmdSensorSetAlignmentAndLeverArm(SbgEComHandle *pHandle, con
 		//
 		if (errorCode == SBG_NO_ERROR)
 		{
-			printf("Debug 5 \n");
-
 			//
 			// Try to read the device answer for 500 ms
 			//
 			errorCode = sbgEComWaitForAck(pHandle, SBG_ECOM_CLASS_LOG_CMD_0, SBG_ECOM_CMD_IMU_ALIGNMENT_LEVER_ARM, pHandle->cmdDefaultTimeOut);
-			printf("halabala %d \n",errorCode);
 			//
 			// Test if we have received a valid ACK
 			//
 			if (errorCode == SBG_NO_ERROR)
 			{
-				printf("Debug 6 \n");
 
 				//
 				// The command has been executed successfully so return
