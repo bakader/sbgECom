@@ -169,7 +169,7 @@ static SbgErrorCode ChangeGNSSConfigRequest(SbgInterface *pInterface, float leve
 	return errorCode;
 }
 
-static SbgErrorCode ChangeSensorConfigRequest(SbgInterface *pInterface, int axisDirectionX, int axisDirectionY, float misRoll, float misPitch, float misYaw, const float* pleverArm)
+static SbgErrorCode ChangeSensorConfigRequest(SbgInterface *pInterface, uint8 axisDirectionX, uint8 axisDirectionY, float misRoll, float misPitch, float misYaw, const float* pleverArm)
 {
 	SbgEComHandle comHandle;
 	assert(pInterface);
@@ -184,8 +184,8 @@ static SbgErrorCode ChangeSensorConfigRequest(SbgInterface *pInterface, int axis
 	errorCode = getAndPrintProductInfo(&comHandle);
 	
 	SbgEComSensorAlignmentInfo sbgEComSensorAlignmentInfo;
-	sbgEComSensorAlignmentInfo.axisDirectionX = 0;
-	sbgEComSensorAlignmentInfo.axisDirectionY = 3;
+	sbgEComSensorAlignmentInfo.axisDirectionX = axisDirectionX;
+	sbgEComSensorAlignmentInfo.axisDirectionY = axisDirectionY;
 	sbgEComSensorAlignmentInfo.misRoll = misRoll;
 	sbgEComSensorAlignmentInfo.misPitch = misPitch;
 	sbgEComSensorAlignmentInfo.misYaw = misYaw;
