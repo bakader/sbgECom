@@ -190,7 +190,7 @@ static SbgErrorCode ChangeSensorConfigRequest(SbgInterface *pInterface, int axis
 	for (int i=0; i<=10; i++)
 	{
 		printf("Updating settings tryout: %d. \n", i);
-		errorCode = sbgEComCmdSensorSetAlignmentAndLeverArm(&comHandle, &sbgEComSensorAlignmentInfo, leverArm);
+		errorCode = sbgEComCmdSensorSetAlignmentAndLeverArm(&comHandle, &sbgEComSensorAlignmentInfo, &leverArm);
 
 		if (errorCode != SBG_NO_ERROR)
 		{
@@ -328,7 +328,7 @@ extern "C" {
 	}
 	MODULE_API bool ChangeSensorConfig(char serialPortName[], int baudrate, int axisDirectionX, int axisDirectionY, float misroll, float mispitch, float misyaw, float leverArm[3])
 	{
-		printf("Starting config changing procedure ... \n");
+		printf("Starting config changing procedure2 ... \n");
 		SbgErrorCode		errorCode = SBG_NO_ERROR;
 		SbgInterface		sbgInterface;
 		errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPortName, baudrate);
