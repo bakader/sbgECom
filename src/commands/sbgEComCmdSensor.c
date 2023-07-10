@@ -472,7 +472,7 @@ SbgErrorCode sbgEComCmdSensorSetAlignmentAndLeverArm(SbgEComHandle *pHandle, con
 			//
 			// Test if we have received a valid ACK
 			//
-			if (errorCode == f)
+			if (errorCode == SBG_NO_ERROR)
 			{
 				printf("Debug 6 \n");
 
