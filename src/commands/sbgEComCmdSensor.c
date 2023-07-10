@@ -438,11 +438,11 @@ SbgErrorCode sbgEComCmdSensorSetAlignmentAndLeverArm(SbgEComHandle *pHandle, con
 		//
 		// Build payload
 		//
-		sbgStreamBufferWriteUint8LE(&outputStream, (uint8_t)pAlignConf->0);
-		sbgStreamBufferWriteUint8LE(&outputStream, (uint8_t)pAlignConf->3);
-		sbgStreamBufferWriteFloatLE(&outputStream, pAlignConf->0.0f);
-		sbgStreamBufferWriteFloatLE(&outputStream, pAlignConf->0.0f);
-		sbgStreamBufferWriteFloatLE(&outputStream, pAlignConf->0.0f);
+		sbgStreamBufferWriteUint8LE(&outputStream, 0);
+		sbgStreamBufferWriteUint8LE(&outputStream, 3);
+		sbgStreamBufferWriteFloatLE(&outputStream, 0.0f);
+		sbgStreamBufferWriteFloatLE(&outputStream, 0.0f);
+		sbgStreamBufferWriteFloatLE(&outputStream, 0.0f);
 		printf("Debug 3 \n");
 
 		//Todo fix this
