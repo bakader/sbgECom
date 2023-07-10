@@ -217,7 +217,7 @@ extern "C" {
 		// Create a serial interface to communicate with the PULSE
 		//
 		errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPortName, baudrate);
-		errorCode = sbgEComInit(&comHandle, pInterface);
+		errorCode = sbgEComInit(&comHandle, &sbgInterface);
 		printf("Saving new settings. \n");
 		for (int i=0; i<=10; i++)
 		{
