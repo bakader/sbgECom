@@ -191,7 +191,7 @@ static SbgErrorCode ChangeSensorConfigRequest(SbgInterface *pInterface, int axis
 	sbgEComSensorAlignmentInfo.misYaw = misYaw;
 	
 	printf("Setting new settings. \n");
-	for (int i=0; i<=10; i++)
+	for (int i=0; i<=100; i++)
 	{
 		printf("Updating settings tryout: %d. \n", i);
 		errorCode = sbgEComCmdSensorSetAlignmentAndLeverArm(&comHandle, &sbgEComSensorAlignmentInfo, pleverArm);
@@ -199,7 +199,7 @@ static SbgErrorCode ChangeSensorConfigRequest(SbgInterface *pInterface, int axis
 		if (errorCode != SBG_NO_ERROR)
 		{
 			printf("Unable to configure. Trying again...");
-			if (i==10)
+			if (i==100)
 			{
 				return errorCode;
 			}
