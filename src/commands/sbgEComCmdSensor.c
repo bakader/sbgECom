@@ -440,9 +440,9 @@ SbgErrorCode sbgEComCmdSensorSetAlignmentAndLeverArm(SbgEComHandle *pHandle, con
 		//
 		sbgStreamBufferWriteUint8LE(&outputStream, 0);
 		sbgStreamBufferWriteUint8LE(&outputStream, 3);
-		sbgStreamBufferWriteFloatLE(&outputStream, 0.0f);
-		sbgStreamBufferWriteFloatLE(&outputStream, 0.0f);
-		sbgStreamBufferWriteFloatLE(&outputStream, 0.0f);
+		sbgStreamBufferWriteFloatLE(&outputStream, pAlignConf->misRoll);
+		sbgStreamBufferWriteFloatLE(&outputStream, pAlignConf->misPitch);
+		sbgStreamBufferWriteFloatLE(&outputStream, pAlignConf->misYaw);
 		printf("Debug 3 \n");
 
 		//Todo fix this
