@@ -169,7 +169,7 @@ static SbgErrorCode ChangeGNSSConfigRequest(SbgInterface *pInterface, float leve
 	return errorCode;
 }
 
-static SbgErrorCode ChangeSensorConfigRequest(SbgInterface *pInterface, int axisDirectionX, int axisDirectionY, float misRoll, float misPitch, float misYaw, const float leverArm[3])
+static SbgErrorCode ChangeSensorConfigRequest(SbgInterface *pInterface, int axisDirectionX, int axisDirectionY, float misRoll, float misPitch, float misYaw, const float* pleverArm)
 {
 	SbgEComHandle comHandle;
 	assert(pInterface);
@@ -179,6 +179,10 @@ static SbgErrorCode ChangeSensorConfigRequest(SbgInterface *pInterface, int axis
 		printf("Failed to init sbgECom");
 		return errorCode;
 	}
+	printf("sbgECom version %s\n\n", SBG_E_COM_VERSION_STR);
+
+	errorCode = getAndPrintProductInfo(&comHandle);
+	
 	SbgEComSensorAlignmentInfo sbgEComSensorAlignmentInfo;
 	sbgEComSensorAlignmentInfo.axisDirectionX = axisDirectionX;
 	sbgEComSensorAlignmentInfo.axisDirectionY = axisDirectionY;
