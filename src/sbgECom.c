@@ -211,6 +211,7 @@ extern "C" {
 	{
 		SbgErrorCode		errorCode = SBG_NO_ERROR;
 		SbgInterface		sbgInterface;
+		SbgEComHandle comHandle;
 
 		//
 		// Create a serial interface to communicate with the PULSE
