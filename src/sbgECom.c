@@ -184,8 +184,8 @@ static SbgErrorCode ChangeSensorConfigRequest(SbgInterface *pInterface, int axis
 	errorCode = getAndPrintProductInfo(&comHandle);
 	
 	SbgEComSensorAlignmentInfo sbgEComSensorAlignmentInfo;
-	sbgEComSensorAlignmentInfo.axisDirectionX = axisDirectionX;
-	sbgEComSensorAlignmentInfo.axisDirectionY = axisDirectionY;
+	sbgEComSensorAlignmentInfo.axisDirectionX = 0;
+	sbgEComSensorAlignmentInfo.axisDirectionY = 3;
 	sbgEComSensorAlignmentInfo.misRoll = misRoll;
 	sbgEComSensorAlignmentInfo.misPitch = misPitch;
 	sbgEComSensorAlignmentInfo.misYaw = misYaw;
