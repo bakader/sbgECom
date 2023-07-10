@@ -364,7 +364,7 @@ extern "C" {
 		errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPortName, baudrate);
 		if (errorCode != SBG_NO_ERROR)
 		{
-			//printf("Failed to created serial interface in the task of getting GPS Position. \n");
+			printf("Failed to created serial interface in the task of getting Sensor Configs. \n");
 			return false;
 		}
 		SbgEComHandle comHandle;
@@ -372,7 +372,7 @@ extern "C" {
 		errorCode = sbgEComInit(&comHandle, &sbgInterface);
 		if (errorCode != SBG_NO_ERROR)
 		{
-			//printf("Failed to initialize sbgECom in the task of getting GPS Position. \n");
+			printf("Failed to initialize sbgECom in the task of getting Sensor Configs. \n");
 			return false;
 		}
 
@@ -381,8 +381,14 @@ extern "C" {
 		double* pleverArm = leverArm;
 		
 
-		sbgEComCmdSensorSetAlignmentAndLeverArm(&comHandle, &myInfo, &leverArm);
+		errorCode = sbgEComCmdSensorGetAlignmentAndLeverArm(&comHandle, &myInfo, &leverArm);
+		if (errorCode != SBG_NO_ERROR)
+		{
+			printf("Failed to Get the configs. \n");
+			return false;
+		}
 
+		
 		*axisDirectionX = myInfo.axisDirectionX;
 		*axisDirectionY = myInfo.axisDirectionY;
 		*misroll = myInfo.misRoll;
