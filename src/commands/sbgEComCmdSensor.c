@@ -445,9 +445,10 @@ SbgErrorCode sbgEComCmdSensorSetAlignmentAndLeverArm(SbgEComHandle *pHandle, con
 		sbgStreamBufferWriteFloatLE(&outputStream, pAlignConf->misYaw);
 		printf("Debug 3 \n");
 
-		sbgStreamBufferWriteFloatLE(&outputStream, pLeverArm[0]);
-		sbgStreamBufferWriteFloatLE(&outputStream, pLeverArm[1]);
-		sbgStreamBufferWriteFloatLE(&outputStream, pLeverArm[2]);
+		//Todo fix this
+		sbgStreamBufferWriteFloatLE(&outputStream, 0);
+		sbgStreamBufferWriteFloatLE(&outputStream, 0);
+		sbgStreamBufferWriteFloatLE(&outputStream, 0);
 		printf("Debug 4 \n");
 
 
