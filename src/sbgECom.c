@@ -359,6 +359,7 @@ extern "C" {
 
 	MODULE_API bool GetSensorConfig(char serialPortName[], int baudrate, int* axisDirectionX, int* axisDirectionY, float* misroll, float* mispitch, float* misyaw)
 	{
+		printf("Getting your sensor config \n");
 		SbgErrorCode errorCode = SBG_NO_ERROR;
 		SbgInterface sbgInterface;
 		errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPortName, baudrate);
