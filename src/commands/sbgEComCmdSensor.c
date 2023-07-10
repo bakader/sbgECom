@@ -468,7 +468,7 @@ SbgErrorCode sbgEComCmdSensorSetAlignmentAndLeverArm(SbgEComHandle *pHandle, con
 			// Try to read the device answer for 500 ms
 			//
 			errorCode = sbgEComWaitForAck(pHandle, SBG_ECOM_CLASS_LOG_CMD_0, SBG_ECOM_CMD_IMU_ALIGNMENT_LEVER_ARM, pHandle->cmdDefaultTimeOut);
-			printf("halabala &d",errorCode);
+			printf("halabala %d \n",errorCode);
 			//
 			// Test if we have received a valid ACK
 			//
