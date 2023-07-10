@@ -194,7 +194,7 @@ static SbgErrorCode ChangeSensorConfigRequest(SbgInterface *pInterface, int axis
 	for (int i=0; i<=10; i++)
 	{
 		printf("Updating settings tryout: %d. \n", i);
-		errorCode = sbgEComCmdSensorSetAlignmentAndLeverArm(&comHandle, &sbgEComSensorAlignmentInfo, &leverArm);
+		errorCode = sbgEComCmdSensorSetAlignmentAndLeverArm(&comHandle, &sbgEComSensorAlignmentInfo, pleverArm);
 
 		if (errorCode != SBG_NO_ERROR)
 		{
