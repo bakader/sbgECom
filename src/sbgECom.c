@@ -139,27 +139,6 @@ static SbgErrorCode ChangeGNSSConfigRequest(SbgInterface *pInterface, float leve
 			}
 			
 		}
-		printf("Saving new settings. \n");
-		for (int i=0; i<=10; i++)
-		{
-			printf("Saving settings tryout: %d. \n", i);
-			errorCode = sbgEComCmdSettingsAction(&comHandle, SBG_ECOM_SAVE_SETTINGS);
-
-			if (errorCode != SBG_NO_ERROR)
-			{
-				printf("Unable to save. Trying again...");
-				if (i==10)
-				{
-					return errorCode;
-				}
-			}
-			else
-			{
-				printf("Successfully saved new GNSS config.\n");
-				break;
-			}
-			
-		}
 	}
 	else
 	{
@@ -211,27 +190,6 @@ static SbgErrorCode ChangeSensorConfigRequest(SbgInterface *pInterface, uint8 ax
 		}
 			
 	}
-	printf("Saving new settings. \n");
-	for (int i=0; i<=10; i++)
-	{
-		printf("Saving settings tryout: %d. \n", i);
-		errorCode = sbgEComCmdSettingsAction(&comHandle, SBG_ECOM_SAVE_SETTINGS);
-
-		if (errorCode != SBG_NO_ERROR)
-		{
-			printf("Unable to save. Trying again...");
-			if (i==10)
-			{
-				return errorCode;
-			}
-		}
-		else
-		{
-			printf("Successfully saved new GNSS config.\n");
-			break;
-		}
-			
-	}
 	return errorCode;
 }
 
@@ -249,7 +207,40 @@ extern "C" {
 #else
 #  define MODULE_API
 #endif
+	MODULE_API bool SaveAndRestartSensor(char serialPortName[], int baudrate)
+	{
+		SbgErrorCode		errorCode = SBG_NO_ERROR;
+		SbgInterface		sbgInterface;
 
+		//
+		// Create a serial interface to communicate with the PULSE
+		//
+		errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPortName, baudrate);
+		errorCode = sbgEComInit(&comHandle, pInterface);
+		printf("Saving new settings. \n");
+		for (int i=0; i<=10; i++)
+		{
+			printf("Saving settings tryout: %d. \n", i);
+			errorCode = sbgEComCmdSettingsAction(&comHandle, SBG_ECOM_SAVE_SETTINGS);
+
+			if (errorCode != SBG_NO_ERROR)
+			{
+				printf("Unable to save. Trying again...");
+				if (i==10)
+				{
+					return errorCode;
+				}
+			}
+			else
+			{
+				printf("Successfully saved new GNSS config.\n");
+				break;
+			}
+			
+		}
+	}
+
+	
 	MODULE_API bool ChangeGNSSConfig(char serialPortName[], int baudrate, float leverArmPrimary[3], bool leverArmPrimaryPrecise, float leverArmSecondary[3], int leverArmSecondaryMode)
 	{
 		printf("Starting config changing procedure... \n");
