@@ -76,6 +76,15 @@ static SbgErrorCode gpsOnLogReceivedAnt2(SbgEComHandle *pECom, SbgEComClass msgC
 	}
 	return SBG_NO_ERROR;
 }
+static SbgErrorCode gpsOnLogReceivedNmea(SbgEComHandle *pECom, SbgEComClass msgClass, SbgEComMsgId msg, const SbgBinaryLogData *pLogData, double *p)
+{
+	if (msgClass == SBG_ECOM_CLASS_LOG_ECOM_0 && msg==SBG_ECOM_LOG_NMEA_GGA)
+	{
+		printf(pLogData);
+		*p = pLogData;
+	}
+	return SBG_NO_ERROR;
+}
 
 void printGNSSConfig(SbgEComGnssInstallation sbgEComGnssInstallation)
 {
@@ -381,7 +390,7 @@ extern "C" {
 		}
 		return true;
 	}
-	MODULE_API bool GetNmea(char* ggaMsg, char* serialPort, int baudrate)
+	MODULE_API bool GetNmea(char* serialPort, int baudrate)
 	{
 		SbgErrorCode errorCode = SBG_NO_ERROR;
 		SbgInterface sbgInterface;
@@ -400,7 +409,7 @@ extern "C" {
 			return false;
 		}
 		char* pGgaMsg = ggaMsg;
-		sbgEComSetReceiveLogCallback(&comHandle, gpsOnLogReceivedAnt1, pGgaMsg);
+		sbgEComSetReceiveLogCallback(&comHandle, gpsOnLogReceivedNmea, pGgaMsg);
 		int exitCounter = 0;
 		while (exitCounter < 10)
 		{
