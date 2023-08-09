@@ -78,10 +78,10 @@ static SbgErrorCode gpsOnLogReceivedAnt2(SbgEComHandle *pECom, SbgEComClass msgC
 }
 static SbgErrorCode gpsOnLogReceivedNmea(SbgEComHandle *pECom, SbgEComClass msgClass, SbgEComMsgId msg, const SbgBinaryLogData *pLogData, double *p)
 {
-	if (msgClass == SBG_ECOM_CLASS_LOG_ECOM_0 && msg==SBG_ECOM_LOG_NMEA_GGA)
+	if (msgClass == SBG_ECOM_CLASS_LOG_ECOM_0 && msg == SBG_ECOM_LOG_NMEA_GGA)
 	{
-		printf(pLogData);
-		*p = pLogData;
+		*p = pLogData->data;
+		printf("success");
 	}
 	return SBG_NO_ERROR;
 }
