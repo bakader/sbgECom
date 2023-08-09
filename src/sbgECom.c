@@ -417,10 +417,6 @@ extern "C" {
 		}
 		sbgInterfaceDestroy(&sbgInterface);
 		sbgEComClose(&comHandle);
-		*latitude = gpsPos[0];
-		*longitude = gpsPos[1];
-		*altitude = gpsPos[2];
-		//printf("Value of my assigned pointer is: %f, %f, %f \n", *(latitude), *(longitude), *(altitude));
 		if (exitCounter < 10)
 		{
 			return false;
