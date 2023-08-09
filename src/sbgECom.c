@@ -52,9 +52,21 @@ SbgErrorCode getAndPrintProductInfo(SbgEComHandle *pECom)
 	}
 }
 
-static SbgErrorCode gpsOnLogReceived(SbgEComHandle *pECom, SbgEComClass msgClass, SbgEComMsgId msg, const SbgBinaryLogData *pLogData, double *p)
+static SbgErrorCode gpsOnLogReceivedAnt1(SbgEComHandle *pECom, SbgEComClass msgClass, SbgEComMsgId msg, const SbgBinaryLogData *pLogData, double *p)
 {
 	if (msgClass == SBG_ECOM_CLASS_LOG_ECOM_0 && msg==SBG_ECOM_LOG_GPS1_POS)
+	{
+		*p = pLogData->gpsPosData.latitude;
+		p++;
+		*p = pLogData->gpsPosData.longitude;
+		p++;
+		*p = pLogData->gpsPosData.altitude;
+	}
+	return SBG_NO_ERROR;
+}
+static SbgErrorCode gpsOnLogReceivedAnt2(SbgEComHandle *pECom, SbgEComClass msgClass, SbgEComMsgId msg, const SbgBinaryLogData *pLogData, double *p)
+{
+	if (msgClass == SBG_ECOM_CLASS_LOG_ECOM_0 && msg==SBG_ECOM_LOG_GPS2_POS)
 	{
 		*p = pLogData->gpsPosData.latitude;
 		p++;
@@ -275,7 +287,7 @@ extern "C" {
 		return false;
     
 	}
-	MODULE_API bool GetGpsPos(double* latitude, double* longitude, double* altitude, char* serialPort, int baudrate)
+	MODULE_API bool GetGpsPosAnt2(double* latitude, double* longitude, double* altitude, char* serialPort, int baudrate)
 	{
 		SbgErrorCode errorCode = SBG_NO_ERROR;
 		SbgInterface sbgInterface;
@@ -295,7 +307,7 @@ extern "C" {
 		}
 		double gpsPos[3] = {0,0,0};
 		double* pGpsPos = gpsPos;
-		sbgEComSetReceiveLogCallback(&comHandle, gpsOnLogReceived, pGpsPos);
+		sbgEComSetReceiveLogCallback(&comHandle, gpsOnLogReceivedAnt2, pGpsPos);
 		int exitCounter = 0;
 		while (exitCounter < 10)
 		{
@@ -303,6 +315,99 @@ extern "C" {
 			if (errorCode!= SBG_ERROR)
 			{
 				if (gpsPos[0]!=0.0 && gpsPos[1]!=0.0 && gpsPos[2]!=0.0)
+				{
+					exitCounter = 100;
+				}
+				sbgSleep(50);
+			}
+			exitCounter ++;
+		}
+		sbgInterfaceDestroy(&sbgInterface);
+		sbgEComClose(&comHandle);
+		*latitude = gpsPos[0];
+		*longitude = gpsPos[1];
+		*altitude = gpsPos[2];
+		//printf("Value of my assigned pointer is: %f, %f, %f \n", *(latitude), *(longitude), *(altitude));
+		if (exitCounter < 10)
+		{
+			return false;
+		}
+		return true;
+	}
+	MODULE_API bool GetGpsPosAnt1(double* latitude, double* longitude, double* altitude, char* serialPort, int baudrate)
+	{
+		SbgErrorCode errorCode = SBG_NO_ERROR;
+		SbgInterface sbgInterface;
+		errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPort, baudrate);
+		if (errorCode != SBG_NO_ERROR)
+		{
+			//printf("Failed to created serial interface in the task of getting GPS Position. \n");
+			return false;
+		}
+		SbgEComHandle comHandle;
+		
+		errorCode = sbgEComInit(&comHandle, &sbgInterface);
+		if (errorCode != SBG_NO_ERROR)
+		{
+			//printf("Failed to initialize sbgECom in the task of getting GPS Position. \n");
+			return false;
+		}
+		double gpsPos[3] = {0,0,0};
+		double* pGpsPos = gpsPos;
+		sbgEComSetReceiveLogCallback(&comHandle, gpsOnLogReceivedAnt1, pGpsPos);
+		int exitCounter = 0;
+		while (exitCounter < 10)
+		{
+			errorCode = sbgEComHandle(&comHandle);
+			if (errorCode!= SBG_ERROR)
+			{
+				if (gpsPos[0]!=0.0 && gpsPos[1]!=0.0 && gpsPos[2]!=0.0)
+				{
+					exitCounter = 100;
+				}
+				sbgSleep(50);
+			}
+			exitCounter ++;
+		}
+		sbgInterfaceDestroy(&sbgInterface);
+		sbgEComClose(&comHandle);
+		*latitude = gpsPos[0];
+		*longitude = gpsPos[1];
+		*altitude = gpsPos[2];
+		//printf("Value of my assigned pointer is: %f, %f, %f \n", *(latitude), *(longitude), *(altitude));
+		if (exitCounter < 10)
+		{
+			return false;
+		}
+		return true;
+	}
+	MODULE_API bool GetNmea(char* ggaMsg, char* serialPort, int baudrate)
+	{
+		SbgErrorCode errorCode = SBG_NO_ERROR;
+		SbgInterface sbgInterface;
+		errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPort, baudrate);
+		if (errorCode != SBG_NO_ERROR)
+		{
+			//printf("Failed to created serial interface in the task of getting GPS Position. \n");
+			return false;
+		}
+		SbgEComHandle comHandle;
+		
+		errorCode = sbgEComInit(&comHandle, &sbgInterface);
+		if (errorCode != SBG_NO_ERROR)
+		{
+			//printf("Failed to initialize sbgECom in the task of getting GPS Position. \n");
+			return false;
+		}
+		char* pGgaMsg = ggaMsg;
+		sbgEComSetReceiveLogCallback(&comHandle, gpsOnLogReceivedAnt1, pGgaMsg);
+		int exitCounter = 0;
+		while (exitCounter < 10)
+		{
+			errorCode = sbgEComHandle(&comHandle);
+			if (errorCode!= SBG_ERROR)
+			{
+				if (strlen(ggaMsg))
 				{
 					exitCounter = 100;
 				}
