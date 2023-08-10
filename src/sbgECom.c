@@ -334,8 +334,9 @@ extern "C" {
 				*(*latitudeArray)++;
             	*(*longitudeArray)++;
             	*(*altitudeArray)++;
+				printf("Latitude = %f\n", latitude);
 			}
-			printf("Latitude = %f\n", latitude);
+			
 		}
 		return false;
 	}
