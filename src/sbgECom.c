@@ -313,8 +313,9 @@ extern "C" {
 
     	// Collect sensor data for 30 seconds
 		int i = 0;
-    	while (i<30)
+    	while (true)
     	{
+			printf("Calculating");
 			i++;
     	    errorCode = sbgEComHandleOneLog(&comHandle);
         	if (errorCode == SBG_NO_ERROR)
@@ -331,7 +332,7 @@ extern "C" {
             *(*longitudeArray)++;
             *(*altitudeArray)++;
 			printf("Latitude = %f\n", latitude);
-        }
+        	}
 		return true;
     }
 
