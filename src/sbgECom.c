@@ -293,7 +293,7 @@ extern "C" {
     	SbgErrorCode errorCode = SBG_NO_ERROR;
     	SbgInterface sbgInterface;
     	errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPort, baudrate);
-    	while (errorCode == SBG_NO_ERROR)
+    	while (true)
 		{
 			printf("trying again \n");
 			sbgSleep(50);
