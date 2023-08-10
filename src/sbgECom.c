@@ -327,14 +327,14 @@ extern "C" {
             	double latitude = gpsPos[0];
 				double longitude = gpsPos[1];
 				double altitude = gpsPos[2];
+            	// Store data in arrays
+            	*(*latitudeArray) = latitude;
+            	*(*longitudeArray) = longitude;
+            	*(*altitudeArray) = altitude;
+				*(*latitudeArray)++;
+            	*(*longitudeArray)++;
+            	*(*altitudeArray)++;
 			}
-            // Store data in arrays
-            *(*latitudeArray) = latitude;
-            *(*longitudeArray) = longitude;
-            *(*altitudeArray) = altitude;
-			*(*latitudeArray)++;
-            *(*longitudeArray)++;
-            *(*altitudeArray)++;
 			printf("Latitude = %f\n", latitude);
 		}
 		return false;
