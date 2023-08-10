@@ -290,6 +290,7 @@ extern "C" {
 	MODULE_API bool GetGpsDataStream(double** latitudeArray, double** longitudeArray, double** altitudeArray, const char* serialPort, int baudrate)
 	{
 		printf("Hello");
+		return true;
 	}
 	MODULE_API bool GetGpsPosAnt2(double* latitude, double* longitude, double* altitude, char* serialPort, int baudrate)
 	{
