@@ -287,6 +287,95 @@ extern "C" {
 		return false;
     
 	}
+	MODULE_API bool GetGpsDataStream(double** latitudeArray, double** longitudeArray, double** altitudeArray, const char* serialPort, int baudrate)
+	{
+    	SbgErrorCode errorCode = SBG_NO_ERROR;
+    	SbgInterface sbgInterface;
+    	errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPort, baudrate);
+    	if (errorCode != SBG_NO_ERROR)
+    	{
+        	// Handle error appropriately, maybe call a callback or throw an exception
+        	return false;
+    	}
+
+    	SbgEComHandle comHandle;
+    	errorCode = sbgEComInit(&comHandle, &sbgInterface);
+    	if (errorCode != SBG_NO_ERROR)
+    	{
+        	sbgInterfaceDestroy(&sbgInterface);
+        	// Handle error appropriately
+        	return false;
+    	}
+
+    	// Initialize variables for data collection
+    	const std::chrono::steady_clock::time_point startTime = std::chrono::steady_clock::now();
+    	const size_t initialCapacity = 100; // Initial capacity for arrays
+    	size_t capacity = initialCapacity;
+    	size_t sampleIndex = 0;
+
+    	*latitudeArray = new double[capacity];
+    	*longitudeArray = new double[capacity];
+    	*altitudeArray = new double[capacity];
+
+		double gpsPos[3] = {0,0,0};
+		double* pGpsPos = gpsPos;
+		sbgEComSetReceiveLogCallback(&comHandle, gpsOnLogReceivedAnt2, pGpsPos);
+
+    	// Collect sensor data for 30 seconds
+    	while (std::chrono::steady_clock::now() - startTime < std::chrono::seconds(30))
+    	{
+    	    errorCode = sbgEComHandleOneLog(&comHandle);
+        	if (errorCode == SBG_NO_ERROR)
+        	{
+            	double latitude = gpsPos[0];
+				double longitude = gpsPos[1];
+				double altitude = gpsPos[2];
+            
+            // If capacity is exceeded, resize the arrays
+            if (sampleIndex >= capacity)
+            {
+                capacity *= 2; // Double the capacity
+                double* newLatitudeArray = new double[capacity];
+                double* newLongitudeArray = new double[capacity];
+                double* newAltitudeArray = new double[capacity];
+                
+                // Copy existing data to the new arrays
+                for (size_t i = 0; i < sampleIndex; ++i)
+                {
+                    newLatitudeArray[i] = (*latitudeArray)[i];
+                    newLongitudeArray[i] = (*longitudeArray)[i];
+                    newAltitudeArray[i] = (*altitudeArray)[i];
+                }
+
+                // Deallocate old memory
+                delete[] *latitudeArray;
+                delete[] *longitudeArray;
+                delete[] *altitudeArray;
+
+                // Update pointers
+                *latitudeArray = newLatitudeArray;
+                *longitudeArray = newLongitudeArray;
+                *altitudeArray = newAltitudeArray;
+            }
+            
+            // Store data in arrays
+            (*latitudeArray)[sampleIndex] = latitude;
+            (*longitudeArray)[sampleIndex] = longitude;
+            (*altitudeArray)[sampleIndex] = altitude;
+			printf("Latitude = %f\n", latitude);
+            ++sampleIndex;
+        }
+		return true;
+    }
+
+    // Update the number of samples
+    *numSamples = sampleIndex;
+
+    // Cleanup before returning
+    sbgEComClose(&comHandle);
+    sbgInterfaceDestroy(&sbgInterface);
+    return true;
+}
 	MODULE_API bool GetGpsPosAnt2(double* latitude, double* longitude, double* altitude, char* serialPort, int baudrate)
 	{
 		SbgErrorCode errorCode = SBG_NO_ERROR;
