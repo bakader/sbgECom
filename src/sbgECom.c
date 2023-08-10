@@ -287,7 +287,7 @@ extern "C" {
 		return false;
     
 	}
-	MODULE_API bool GetGpsDataStream(double** latitudeArray, double** longitudeArray, double** altitudeArray, const char* serialPort, int baudrate)
+	MODULE_API bool GetGpsDataStream(const char* serialPort, int baudrate)
 	{
 		printf("Got in function");
     	SbgErrorCode errorCode = SBG_NO_ERROR;
@@ -324,19 +324,9 @@ extern "C" {
     	    errorCode = sbgEComHandleOneLog(&comHandle);
         	if (errorCode == SBG_NO_ERROR)
         	{
-            	double latitude = gpsPos[0];
-				double longitude = gpsPos[1];
-				double altitude = gpsPos[2];
-            	// Store data in arrays
-            	*(*latitudeArray) = latitude;
-            	*(*longitudeArray) = longitude;
-            	*(*altitudeArray) = altitude;
-				*(*latitudeArray)++;
-            	*(*longitudeArray)++;
-            	*(*altitudeArray)++;
-				printf("Latitude = %f\n", latitude);
+				printf("Latitude = %f\n", gpsPos[0]);
 			}
-			
+			sbgSleep(50);
 		}
 		return false;
 	}
