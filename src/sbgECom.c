@@ -327,8 +327,10 @@ extern "C" {
             *(*latitudeArray) = latitude;
             *(*longitudeArray) = longitude;
             *(*altitudeArray) = altitude;
+			*(*latitudeArray)++;
+            *(*longitudeArray)++;
+            *(*altitudeArray)++;
 			printf("Latitude = %f\n", latitude);
-            ++sampleIndex;
         }
 		return true;
     }
