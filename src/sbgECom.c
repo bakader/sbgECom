@@ -407,7 +407,8 @@ extern "C" {
 			//printf("Failed to initialize sbgECom in the task of getting GPS Position. \n");
 			return false;
 		}
-		char* pGgaMsg;
+		char ggaMsg[] = "";
+		char* pGgaMsg = ggaMsg;
 		sbgEComSetReceiveLogCallback(&comHandle, gpsOnLogReceivedNmea, pGgaMsg);
 		int exitCounter = 0;
 		while (exitCounter < 10)
