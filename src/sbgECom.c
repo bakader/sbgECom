@@ -335,9 +335,6 @@ extern "C" {
 		return true;
     }
 
-    // Update the number of samples
-    *numSamples = sampleIndex;
-
     // Cleanup before returning
     sbgEComClose(&comHandle);
     sbgInterfaceDestroy(&sbgInterface);
