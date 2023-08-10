@@ -393,6 +393,8 @@ extern "C" {
 	{
 		SbgErrorCode errorCode = SBG_NO_ERROR;
 		SbgInterface sbgInterface;
+		printf(serialPort);
+		printf("%d", baudrate);
 		errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPort, baudrate);
 		if (errorCode != SBG_NO_ERROR)
 		{
