@@ -287,7 +287,7 @@ extern "C" {
 		return false;
     
 	}
-	MODULE_API bool GetGpsDataStream(const char* serialPort, int baudrate)
+	MODULE_API bool GetGpsDataStream(char* serialPort, int baudrate)
 	{
 		printf("Got in function");
     	SbgErrorCode errorCode = SBG_NO_ERROR;
@@ -297,6 +297,7 @@ extern "C" {
 		{
 			printf("trying again \n");
 			sbgSleep(50);
+			printf(serialPort);
 		}
 		return false;
 	}
