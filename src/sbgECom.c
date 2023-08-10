@@ -391,8 +391,11 @@ extern "C" {
 	}
 	MODULE_API bool GetNmea(char* serialPort, int baudrate)
 	{
+		printf("hello");
 		SbgErrorCode errorCode = SBG_NO_ERROR;
+		printf("there");
 		SbgInterface sbgInterface;
+		printf("pal");
 		printf(serialPort);
 		printf("%d", baudrate);
 		errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPort, baudrate);
