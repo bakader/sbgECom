@@ -287,7 +287,7 @@ extern "C" {
 		return false;
     
 	}
-	MODULE_API bool GetGpsDataStream(char* serialPort, int baudrate)
+	MODULE_API bool GetGpsDataStream(char serialPort[], int baudrate)
 	{
 		printf("Got in function \n");
     	SbgErrorCode errorCode = SBG_NO_ERROR;
@@ -319,7 +319,7 @@ extern "C" {
 		}
 		return false;
 	}
-	MODULE_API bool GetGpsPosAnt2(double* latitude, double* longitude, double* altitude, char* serialPort, int baudrate)
+	MODULE_API bool GetGpsPosAnt2(double* latitude, double* longitude, double* altitude, char serialPort[], int baudrate)
 	{
 		SbgErrorCode errorCode = SBG_NO_ERROR;
 		SbgInterface sbgInterface;
@@ -366,7 +366,7 @@ extern "C" {
 		}
 		return true;
 	}
-	MODULE_API bool GetGpsPosAnt1(double* latitude, double* longitude, double* altitude, char* serialPort, int baudrate)
+	MODULE_API bool GetGpsPosAnt1(double* latitude, double* longitude, double* altitude, char serialPort[], int baudrate)
 	{
 		SbgErrorCode errorCode = SBG_NO_ERROR;
 		SbgInterface sbgInterface;
