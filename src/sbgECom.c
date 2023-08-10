@@ -293,9 +293,9 @@ extern "C" {
     	SbgErrorCode errorCode = SBG_NO_ERROR;
     	SbgInterface sbgInterface;
     	errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPort, baudrate);
-    	while (true)
+    	while (errorCode == SBG_NO_ERROR)
 		{
-			printf("should be in here");
+			printf("trying again \n");
 			sbgSleep(50);
 		}
 		return false;
