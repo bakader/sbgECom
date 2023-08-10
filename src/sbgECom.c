@@ -313,7 +313,7 @@ extern "C" {
     	while (true)
 		{
 			errorCode = sbgEComHandle(&comHandle);
-			printf("valueeee: %f",gpsPos[0]);
+			printf("valueeee: %f",&pGpsPos);
 			printf("trying again \n");
 			sbgSleep(50);
 		}
