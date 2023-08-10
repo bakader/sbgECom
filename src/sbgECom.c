@@ -307,23 +307,15 @@ extern "C" {
         	return false;
     	}
 
-    	// Initialize variables for data collection
-    	const std::chrono::steady_clock::time_point startTime = std::chrono::steady_clock::now();
-    	const size_t initialCapacity = 100; // Initial capacity for arrays
-    	size_t capacity = initialCapacity;
-    	size_t sampleIndex = 0;
-
-    	*latitudeArray = new double[capacity];
-    	*longitudeArray = new double[capacity];
-    	*altitudeArray = new double[capacity];
-
 		double gpsPos[3] = {0,0,0};
 		double* pGpsPos = gpsPos;
 		sbgEComSetReceiveLogCallback(&comHandle, gpsOnLogReceivedAnt2, pGpsPos);
 
     	// Collect sensor data for 30 seconds
-    	while (std::chrono::steady_clock::now() - startTime < std::chrono::seconds(30))
+		int i = 0;
+    	while (i<30)
     	{
+			i++;
     	    errorCode = sbgEComHandleOneLog(&comHandle);
         	if (errorCode == SBG_NO_ERROR)
         	{
@@ -331,37 +323,10 @@ extern "C" {
 				double longitude = gpsPos[1];
 				double altitude = gpsPos[2];
             
-            // If capacity is exceeded, resize the arrays
-            if (sampleIndex >= capacity)
-            {
-                capacity *= 2; // Double the capacity
-                double* newLatitudeArray = new double[capacity];
-                double* newLongitudeArray = new double[capacity];
-                double* newAltitudeArray = new double[capacity];
-                
-                // Copy existing data to the new arrays
-                for (size_t i = 0; i < sampleIndex; ++i)
-                {
-                    newLatitudeArray[i] = (*latitudeArray)[i];
-                    newLongitudeArray[i] = (*longitudeArray)[i];
-                    newAltitudeArray[i] = (*altitudeArray)[i];
-                }
-
-                // Deallocate old memory
-                delete[] *latitudeArray;
-                delete[] *longitudeArray;
-                delete[] *altitudeArray;
-
-                // Update pointers
-                *latitudeArray = newLatitudeArray;
-                *longitudeArray = newLongitudeArray;
-                *altitudeArray = newAltitudeArray;
-            }
-            
             // Store data in arrays
-            (*latitudeArray)[sampleIndex] = latitude;
-            (*longitudeArray)[sampleIndex] = longitude;
-            (*altitudeArray)[sampleIndex] = altitude;
+            *(*latitudeArray) = latitude;
+            *(*longitudeArray) = longitude;
+            *(*altitudeArray) = altitude;
 			printf("Latitude = %f\n", latitude);
             ++sampleIndex;
         }
