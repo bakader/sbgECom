@@ -289,62 +289,8 @@ extern "C" {
 	}
 	MODULE_API bool GetGpsDataStream(double** latitudeArray, double** longitudeArray, double** altitudeArray, const char* serialPort, int baudrate)
 	{
-		printf("Got in function");
-    	SbgErrorCode errorCode = SBG_NO_ERROR;
-    	SbgInterface sbgInterface;
-    	errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPort, baudrate);
-    	if (errorCode != SBG_NO_ERROR)
-    	{
-			printf("Failed to oben Serial");
-
-        	// Handle error appropriately, maybe call a callback or throw an exception
-        	return false;
-    	}
-
-    	SbgEComHandle comHandle;
-    	errorCode = sbgEComInit(&comHandle, &sbgInterface);
-    	if (errorCode != SBG_NO_ERROR)
-    	{
-			printf("Failed to init ecom");
-        	sbgInterfaceDestroy(&sbgInterface);
-        	// Handle error appropriately
-        	return false;
-    	}
-
-		double gpsPos[3] = {0,0,0};
-		double* pGpsPos = gpsPos;
-		sbgEComSetReceiveLogCallback(&comHandle, gpsOnLogReceivedAnt2, pGpsPos);
-
-    	// Collect sensor data for 30 seconds
-		int i = 0;
-    	while (true)
-    	{
-			printf("Calculating");
-			i++;
-    	    errorCode = sbgEComHandleOneLog(&comHandle);
-        	if (errorCode == SBG_NO_ERROR)
-        	{
-            	double latitude = gpsPos[0];
-				double longitude = gpsPos[1];
-				double altitude = gpsPos[2];
-            
-            // Store data in arrays
-            *(*latitudeArray) = latitude;
-            *(*longitudeArray) = longitude;
-            *(*altitudeArray) = altitude;
-			*(*latitudeArray)++;
-            *(*longitudeArray)++;
-            *(*altitudeArray)++;
-			printf("Latitude = %f\n", latitude);
-        	}
-		return true;
-    }
-
-    // Cleanup before returning
-    sbgEComClose(&comHandle);
-    sbgInterfaceDestroy(&sbgInterface);
-    return true;
-}
+		printf("Hello");
+	}
 	MODULE_API bool GetGpsPosAnt2(double* latitude, double* longitude, double* altitude, char* serialPort, int baudrate)
 	{
 		SbgErrorCode errorCode = SBG_NO_ERROR;
