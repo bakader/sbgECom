@@ -289,11 +289,14 @@ extern "C" {
 	}
 	MODULE_API bool GetGpsDataStream(double** latitudeArray, double** longitudeArray, double** altitudeArray, const char* serialPort, int baudrate)
 	{
+		printf("Got in function");
     	SbgErrorCode errorCode = SBG_NO_ERROR;
     	SbgInterface sbgInterface;
     	errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPort, baudrate);
     	if (errorCode != SBG_NO_ERROR)
     	{
+			printf("Failed to oben Serial");
+
         	// Handle error appropriately, maybe call a callback or throw an exception
         	return false;
     	}
@@ -302,6 +305,7 @@ extern "C" {
     	errorCode = sbgEComInit(&comHandle, &sbgInterface);
     	if (errorCode != SBG_NO_ERROR)
     	{
+			printf("Failed to init ecom");
         	sbgInterfaceDestroy(&sbgInterface);
         	// Handle error appropriately
         	return false;
