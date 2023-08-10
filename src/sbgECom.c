@@ -392,49 +392,6 @@ extern "C" {
 	MODULE_API bool GetNmea(char* serialPort, int baudrate)
 	{
 		printf("hello");
-		SbgErrorCode errorCode = SBG_NO_ERROR;
-		printf("there");
-		SbgInterface sbgInterface;
-		printf("pal");
-		printf(serialPort);
-		printf("%d", baudrate);
-		errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPort, baudrate);
-		if (errorCode != SBG_NO_ERROR)
-		{
-			//printf("Failed to created serial interface in the task of getting GPS Position. \n");
-			return false;
-		}
-		SbgEComHandle comHandle;
-		
-		errorCode = sbgEComInit(&comHandle, &sbgInterface);
-		if (errorCode != SBG_NO_ERROR)
-		{
-			//printf("Failed to initialize sbgECom in the task of getting GPS Position. \n");
-			return false;
-		}
-		char ggaMsg[] = "";
-		char* pGgaMsg = ggaMsg;
-		sbgEComSetReceiveLogCallback(&comHandle, gpsOnLogReceivedNmea, pGgaMsg);
-		int exitCounter = 0;
-		while (exitCounter < 10)
-		{
-			errorCode = sbgEComHandle(&comHandle);
-			if (errorCode!= SBG_ERROR)
-			{
-				if (strlen(ggaMsg))
-				{
-					exitCounter = 100;
-				}
-				sbgSleep(50);
-			}
-			exitCounter ++;
-		}
-		sbgInterfaceDestroy(&sbgInterface);
-		sbgEComClose(&comHandle);
-		if (exitCounter < 10)
-		{
-			return false;
-		}
 		return true;
 	}
 	MODULE_API bool ChangeSensorConfig(char serialPortName[], int baudrate, int axisDirectionX, int axisDirectionY, float misroll, float mispitch, float misyaw, float leverArm[3])
