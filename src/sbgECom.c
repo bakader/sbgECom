@@ -287,39 +287,7 @@ extern "C" {
 		return false;
     
 	}
-	MODULE_API bool GetGpsDataStream(char serialPort[], int baudrate)
-	{
-		printf("Got in function \n");
-    	SbgErrorCode errorCode = SBG_NO_ERROR;
-    	SbgInterface sbgInterface;
-    	errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPort, baudrate);
-		if (errorCode != SBG_NO_ERROR)
-		{
-			printf("Failed to created serial interface in the task of getting GPS Position. \n");
-			return false;
-		}
-		SbgEComHandle comHandle;
-		
-		errorCode = sbgEComInit(&comHandle, &sbgInterface);
-		if (errorCode != SBG_NO_ERROR)
-		{
-			printf("Failed to initialize sbgECom in the task of getting GPS Position. \n");
-			return false;
-		}
-
-		double gpsPos[3] = {0,0,0};
-		double* pGpsPos = gpsPos;
-		sbgEComSetReceiveLogCallback(&comHandle, gpsOnLogReceivedAnt2, pGpsPos);
-    	while (true)
-		{
-			errorCode = sbgEComHandle(&comHandle);
-			printf("valueeee: %f",&pGpsPos);
-			printf("trying again \n");
-			sbgSleep(50);
-		}
-		return false;
-	}
-	MODULE_API bool GetGpsPosAnt2(double* latitude, double* longitude, double* altitude, char serialPort[], int baudrate)
+MODULE_API bool GetGpsPosAnt2(double* latitude, double* longitude, double* altitude, char serialPort[], int baudrate)
 	{
 		SbgErrorCode errorCode = SBG_NO_ERROR;
 		SbgInterface sbgInterface;
