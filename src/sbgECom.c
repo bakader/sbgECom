@@ -73,11 +73,11 @@ static SbgErrorCode gpsOnLogReceivedAnt2(SbgEComHandle *pECom, SbgEComClass msgC
 		*p = pLogData->gpsPosData.longitude;
 		p++;
 		*p = pLogData->gpsPosData.altitude;
-		printf("success");
+		printf("success \n");
 	}
 	else
 	{
-		printf("no success");
+		printf("no success \n");
 	}
 	return SBG_NO_ERROR;
 }
