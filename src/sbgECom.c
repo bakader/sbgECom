@@ -64,23 +64,6 @@ static SbgErrorCode gpsOnLogReceivedAnt1(SbgEComHandle *pECom, SbgEComClass msgC
 	}
 	return SBG_NO_ERROR;
 }
-static SbgErrorCode gpsOnLogReceivedAnt2(SbgEComHandle *pECom, SbgEComClass msgClass, SbgEComMsgId msg, const SbgBinaryLogData *pLogData, double *p)
-{
-	if (msg==SBG_ECOM_LOG_GPS2_POS)
-	{
-		*p = pLogData->gpsPosData.latitude;
-		p++;
-		*p = pLogData->gpsPosData.longitude;
-		p++;
-		*p = pLogData->gpsPosData.altitude;
-		printf("success \n");
-	}
-	else
-	{
-		printf("no success \n");
-	}
-	return SBG_NO_ERROR;
-}
 
 void printGNSSConfig(SbgEComGnssInstallation sbgEComGnssInstallation)
 {
@@ -291,53 +274,6 @@ extern "C" {
 		printf("Failed to open interface. \n");
 		return false;
     
-	}
-MODULE_API bool GetGpsPosAnt2(double* latitude, double* longitude, double* altitude, char serialPort[], int baudrate)
-	{
-		SbgErrorCode errorCode = SBG_NO_ERROR;
-		SbgInterface sbgInterface;
-		errorCode = sbgInterfaceSerialCreate(&sbgInterface, serialPort, baudrate);
-		if (errorCode != SBG_NO_ERROR)
-		{
-			//printf("Failed to created serial interface in the task of getting GPS Position. \n");
-			return false;
-		}
-		SbgEComHandle comHandle;
-		
-		errorCode = sbgEComInit(&comHandle, &sbgInterface);
-		if (errorCode != SBG_NO_ERROR)
-		{
-			//printf("Failed to initialize sbgECom in the task of getting GPS Position. \n");
-			return false;
-		}
-		double gpsPos[3] = {0,0,0};
-		double* pGpsPos = gpsPos;
-		sbgEComSetReceiveLogCallback(&comHandle, gpsOnLogReceivedAnt2, pGpsPos);
-		int exitCounter = 0;
-		while (exitCounter < 10)
-		{
-			errorCode = sbgEComHandle(&comHandle);
-			if (errorCode!= SBG_ERROR)
-			{
-				if (gpsPos[0]!=0.0 && gpsPos[1]!=0.0 && gpsPos[2]!=0.0)
-				{
-					exitCounter = 100;
-				}
-				sbgSleep(50);
-			}
-			exitCounter ++;
-		}
-		sbgInterfaceDestroy(&sbgInterface);
-		sbgEComClose(&comHandle);
-		*latitude = gpsPos[0];
-		*longitude = gpsPos[1];
-		*altitude = gpsPos[2];
-		//printf("Value of my assigned pointer is: %f, %f, %f \n", *(latitude), *(longitude), *(altitude));
-		if (exitCounter < 10)
-		{
-			return false;
-		}
-		return true;
 	}
 	MODULE_API bool GetGpsPosAnt1(double* latitude, double* longitude, double* altitude, char serialPort[], int baudrate)
 	{
