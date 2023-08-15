@@ -66,7 +66,7 @@ static SbgErrorCode gpsOnLogReceivedAnt1(SbgEComHandle *pECom, SbgEComClass msgC
 }
 static SbgErrorCode gpsOnLogReceivedAnt2(SbgEComHandle *pECom, SbgEComClass msgClass, SbgEComMsgId msg, const SbgBinaryLogData *pLogData, double *p)
 {
-	if (msgClass == SBG_ECOM_CLASS_LOG_ECOM_0 && msg==SBG_ECOM_LOG_GPS2_POS)
+	if (msg==SBG_ECOM_LOG_GPS2_POS)
 	{
 		*p = pLogData->gpsPosData.latitude;
 		p++;
